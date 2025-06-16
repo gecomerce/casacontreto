@@ -85,9 +85,9 @@ ul, ol {
   -ms-transition: all 0.4s ease-out 0s;
   -o-transition: all 0.4s ease-out 0s;
   transition: all 0.4s ease-out 0s;
-  background-color: #FFB316; }
+  background-color: #00d2f7; }
   .main-btn:hover {
-    background-color: rgba(255, 179, 22, 0.8);
+    background-color: rgba(15, 155, 197, 0.842);
     color: #fff; }
   .main-btn.main-btn-2 {
     background-color: #fff;
@@ -367,7 +367,7 @@ p {
 .navbar-brand {
   padding: 0; }
   .navbar-brand img {
-    width: 150px; }
+    width: 80px; }
 
 .navbar-toggler {
   padding: 0; }
