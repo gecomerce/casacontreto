@@ -1,5 +1,10 @@
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800");
+
+:root{
+  --cor_texto: #ee0909;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   font-weight: normal;
@@ -246,7 +251,7 @@ a:hover {
   height: 65px;
   line-height: 65px;
   font-size: 40px;
-  color: #FFB316;
+  color: #16aaff;
   text-align: center;
   background-color: #fff;
   border-radius: 10px;
@@ -430,7 +435,7 @@ p.form-message.success, p.form-message.error {
   height: 40px;
   line-height: 40px;
   border-radius: 5px;
-  background-color: #FFB316;
+  background-color: var(--cor_texto);
   text-align: center;
   z-index: 99;
   -webkit-transition: all 0.3s ease-out 0s;
