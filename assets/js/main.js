@@ -1,94 +1,87 @@
-$(function() {
+document.addEventListener("DOMContentLoaded", function () {
+  "use strict";
 
-    "use strict";
+  //===== Preloader
+  window.addEventListener("load", function () {
+    const preloader = document.querySelector(".preloader");
+    if (preloader) {
+      setTimeout(() => {
+        preloader.style.transition = "opacity 0.5s";
+        preloader.style.opacity = 0;
+        setTimeout(() => preloader.style.display = "none", 500);
+      }, 500);
+    }
+  });
 
-    //===== Prealoder
+  //===== Sticky Header
+  window.addEventListener("scroll", function () {
+    const header = document.querySelector(".header_navbar");
+    const logo = document.querySelector(".header_navbar img");
+    if (window.scrollY < 20) {
+      header?.classList.remove("sticky");
+      if (logo) logo.src = "assets/images/logo.png";
+    } else {
+      header?.classList.add("sticky");
+      if (logo) logo.src = "assets/images/logo.jpg";
+    }
+  });
 
-    $(window).on('load', function (event) {
-        $('.preloader').delay(500).fadeOut(500);
-    });
+  //===== Section Menu Active
+  const scrollLinks = document.querySelectorAll(".page-scroll");
+  window.addEventListener("scroll", function () {
+    const scrollPos = window.scrollY;
 
-
-    //===== Sticky
-
-    $(window).on('scroll', function (event) {
-        var scroll = $(window).scrollTop();
-        if (scroll < 20) {
-            $(".header_navbar").removeClass("sticky");
-            $(".header_navbar img").attr("src", "assets/images/logo.png");
-        } else {
-            $(".header_navbar").addClass("sticky");
-            $(".header_navbar img").attr("src", "assets/images/logo.jpg");
-        }
-    });
-
-
-    //===== Section Menu Active
-
-    var scrollLink = $('.page-scroll');
-    // Active link switching
-    $(window).scroll(function () {
-        var scrollbarLocation = $(this).scrollTop();
-
-        scrollLink.each(function () {
-
-            var sectionOffset = $(this.hash).offset().top - 73;
-
-            if (sectionOffset <= scrollbarLocation) {
-                $(this).parent().addClass('active');
-                $(this).parent().siblings().removeClass('active');
+    scrollLinks.forEach(link => {
+      const section = document.querySelector(link.hash);
+      if (section) {
+        const sectionTop = section.offsetTop - 73;
+        if (scrollPos >= sectionTop) {
+          link.parentElement?.classList.add("active");
+          [...link.parentElement?.parentElement?.children || []].forEach(li => {
+            if (li !== link.parentElement) {
+              li.classList.remove("active");
             }
-        });
-    });
-    
-
-    //===== close navbar-collapse when a  clicked
-
-    $(".navbar-nav a").on('click', function () {
-        $(".navbar-collapse").removeClass("show");
-    });
-
-    $(".navbar-toggler").on('click', function () {
-        $(this).toggleClass("active");
-    });
-
-    $(".navbar-nav a").on('click', function () {
-        $(".navbar-toggler").removeClass('active');
-    });
-    
-
-    //===== Back to top
-
-    // Show or hide the sticky footer button
-    $(window).on('scroll', function (event) {
-        if ($(this).scrollTop() > 600) {
-            $('.back-to-top').fadeIn(200)
-        } else {
-            $('.back-to-top').fadeOut(200)
+          });
         }
+      }
     });
+  });
 
-
-    //Animate the scroll to yop
-    $('.back-to-top').on('click', function (event) {
-        event.preventDefault();
-
-        $('html, body').animate({
-            scrollTop: 0,
-        }, 1500);
+  //===== Navbar collapse on link click
+  document.querySelectorAll(".navbar-nav a").forEach(link => {
+    link.addEventListener("click", () => {
+      document.querySelector(".navbar-collapse")?.classList.remove("show");
+      document.querySelector(".navbar-toggler")?.classList.remove("active");
     });
+  });
 
+  document.querySelector(".navbar-toggler")?.addEventListener("click", function () {
+    this.classList.toggle("active");
+  });
 
-    //=====  WOW active
+  //===== Back to top button
+  const backToTop = document.querySelector(".back-to-top");
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 600) {
+      backToTop?.classList.add("visible");
+    } else {
+      backToTop?.classList.remove("visible");
+    }
+  });
 
-    var wow = new WOW({
-        boxClass: 'wow', //
-        mobile: false, // 
-    })
-    wow.init();
+  backToTop?.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
 
-    //===== 
-
-
-
+  //===== WOW.js
+  if (typeof WOW === "function") {
+    new WOW({
+      boxClass: 'wow',
+      mobile: false
+    }).init();
+  }
 });
