@@ -12,9 +12,7 @@ window.addEventListener('load', () => {
 
     let movimentacoesBrutas = [];
 
-    function getCorRotulo() {
-        '#FFF';
-    }
+
 
     function inicializarGraficoPizza() {
         myChart.setOption({
@@ -27,7 +25,7 @@ window.addEventListener('load', () => {
                 label: {
                     show: true,
                     position: 'outside',
-                    color: "#fff"
+                    color: "#000"
                 },
                 labelLine: { show: true, length: 5, length2: 2 },
                 data: []
@@ -51,7 +49,7 @@ window.addEventListener('load', () => {
         myChart.setOption({
             series: [{
                 data,
-                axisLabel: { color: '#fff', fontSize: 13 }
+                axisLabel: { color: '#000', fontSize: 13 }
             }]
         });
     }
@@ -115,7 +113,7 @@ window.addEventListener('load', () => {
             xAxis: {
                 type: 'category',
                 data: meses,
-                axisLabel: { color: '#fff', fontSize: 13 }
+                axisLabel: { color: '#000', fontSize: 13 }
             },
             yAxis: { type: 'value', show: false },
             series: [
@@ -131,72 +129,6 @@ window.addEventListener('load', () => {
         });
     }
 
-
-    // function atualizarGraficoLinhas(dados) {
-    //     const agrupado = {};
-
-    //     function parseDataBR(dataBR) {
-    //         const [dia, mes, ano] = dataBR.split('/');
-    //         return new Date(`${ano}-${mes}-${dia}`);
-    //     }
-
-    //     dados.forEach(({ data_vencimento, situacao, valor }) => {
-    //         if (!data_vencimento) return;
-    //         const dataObj = parseDataBR(data_vencimento);
-    //         if (isNaN(dataObj)) return;
-
-    //         const dia = dataObj.getUTCDate().toString().padStart(2, '0');
-    //         if (!agrupado[dia]) agrupado[dia] = { entrada: 0, saida: 0 };
-
-    //         const situacaoFormatada = situacao.trim().toUpperCase();
-    //         if (situacaoFormatada === 'ENTREGUE/REALIZADO') {
-    //             agrupado[dia].entrada += valor;
-    //         } else if (situacaoFormatada === 'ENTREGUE/REALIZADO' || situacaoFormatada === 'ENTREGUE/REALIZADO') {
-    //             agrupado[dia].saida += valor;
-    //         }
-    //     });
-
-    //     const dias = Object.keys(agrupado).sort((a, b) => parseInt(a) - parseInt(b));
-    //     if (dias.length === 0) {
-    //         myLineChart.setOption({ xAxis: { data: [] }, series: [{ data: [] }] });
-    //         return;
-    //     }
-
-    //     let acumuladoSaidas = 0;
-    //     const saidas = [];
-
-    //     dias.forEach(dia => {
-    //         acumuladoSaidas += agrupado[dia].entrada;
-    //         saidas.push(acumuladoSaidas);
-    //     });
-
-    //     myLineChart.setOption({
-    //         grid: { left: '1%', right: '2%', bottom: '15%', top: '1%' },
-    //         tooltip: {
-    //             trigger: 'axis',
-    //             formatter: params => {
-    //                 return `<strong>Dia: ${params[0].axisValue}</strong><br>` +
-    //                     params.map(p => `${p.seriesName}: R$ ${p.data.toFixed(2).replace('.', ',')}`).join('<br>');
-    //             }
-    //         },
-    //         xAxis: {
-    //             type: 'category',
-    //             data: dias,
-    //             axisLabel: { color: '#fff', fontSize: 13 }
-    //         },
-    //         yAxis: { type: 'value', show: false },
-    //         series: [
-    //             {
-    //                 name: 'Gastos',
-    //                 type: 'line',
-    //                 data: saidas,
-    //                 symbol: 'none',
-    //                 areaStyle: { color: 'orange' },
-    //                 lineStyle: { color: 'orange' },
-    //             },
-    //         ]
-    //     });
-    // }
 
     // ---------------------------------------------------------------------
 
@@ -232,7 +164,7 @@ window.addEventListener('load', () => {
                 type: 'category',
                 data: categorias,
                 splitLine: { show: false },
-                axisLabel: { color: '#fff', fontSize: 13 }
+                axisLabel: { color: '#000', fontSize: 13 }
             },
             series: [{
                 type: 'bar',
@@ -242,7 +174,7 @@ window.addEventListener('load', () => {
                     show: true,
                     position: 'right',
                     formatter: p => p.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-                    color: '#fff',
+                    color: '#000',
                     fontSize: 12,
                 }
             }]
