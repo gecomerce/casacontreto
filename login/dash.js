@@ -252,7 +252,7 @@ window.addEventListener('load', () => {
     // -------------------------------------------------------------------------
 
     function contarElementos() {
-        qtd_mov.innerHTML = movimentacoesBrutas.length;
+        qtd_mov.innerHTML = "R$ 200.000,00";
     }
 
 
@@ -264,7 +264,9 @@ window.addEventListener('load', () => {
 
 
     function atualizarValorSaida() {
-        valor_saida.innerHTML = somarSaidas().toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        // valor_saida.innerHTML = somarSaidas().toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        valor_saida.innerHTML = "R$ 192.454,90";
+
     }
 
 
