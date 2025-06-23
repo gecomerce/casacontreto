@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <script async src="dash.js"></script>
+    <title>Projeto Construção</title>
+</head>
+
+<body>
+
+    <div id="loading">
+
+        <div class="spinner" id="spinner"></div>
+
+    </div>
+
+
+    <div class="container">
+
+
+        <div class="analyse">
+
+            <div class="sales">
+
+                <h3>Gastos</h3>
+                <h1 id="qtd_mov">R$ 0,00</h1>
+
+            </div>
+
+            <div class="visits">
+
+                <h3>Andamento</h3>
+                <h1 id="valor_entrada">0%</h1>
+
+            </div>
+
+            <div class="searches">
+
+                <h3>Material</h3>
+                <h1 id="valor_saida">R$ 0,00</h1>
+
+            </div>
+
+            <div class="searches">
+
+                <h3>Mão de Obra</h3>
+                <h1 id="saldo">R$ 0,00</h1>
+
+            </div>
+
+            <div class="searches">
+
+                <h3>Estágio</h3>
+
+
+            </div>
+        </div>
+
+
+        <div class="charts-container">
+
+            <div class="first-line">
+
+                <div class="chart_card">
+
+                    <h3>Status</h3>
+
+                    <div id="pie" style="width: 100%; height: 100%;"></div>
+
+
+                </div>
+
+                <div class="chart_card">
+
+                    <h3>Por Categoria</h3>
+
+                    <div id="bar_saida" style="width: 100%; height: 100%;"></div>
+
+
+                </div>
+
+                <div class="chart_card line-chart">
+
+                    <h3>Por Mês</h3>
+
+                    <div id="line" style="width: 100%; height: 100%;"></div>
+                    
+
+                </div>
+
+
+            </div>
+
+
+            <div class="second-line">
+
+
+                <div class="chart_card">
+
+                    <h3>Planta 3D</h3>
+
+                    <iframe
+                        src="https://sketchfab.com/3d-models/casa-mv-premium02-4295ef97ab8449c895c4687d55926750/embed"
+                        frameborder="0"></iframe>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+<script>
+
+    if (sessionStorage.getItem("logon") !== "1") {
+        alert("Acesso não autorizado! Você será redirecionado para a tela de login.");
+        window.location.href = "index.html";
+    }
+</script>
+
+</html>
