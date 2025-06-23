@@ -5,6 +5,10 @@
   --cor_texto: #ee0909;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   font-weight: normal;
