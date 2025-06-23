@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    --color-white: #0b6b72;
+    --color-white: #0b686e;
     --color-dark-variant: #677483;
-    --color-background: #fff;
+    --color-background: #070a2b;
 
     --card-border-radius: 1rem;
     --border-radius-1: 0.4rem;
@@ -110,50 +110,6 @@ b {
     }
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-
-    .datas {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1vw;
-        background-color: var(--color-white);
-        border-radius: var(--border-radius-1);
-
-        div {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            gap: 1vw;
-            padding: 0.5vw;
-        }
-
-        label {
-            font-size: 0.8vw;
-        }
-
-        select {
-            color: var(--color-dark);
-            background-color: transparent;
-            font-size: 0.8vw;
-
-            option {
-                background-color: var(--color-white);
-            }
-
-        }
-    }
-}
-
-
-#menu-btn {
-    display: none;
-    background-color: transparent;
-    color: var(--color-dark);
-}
 
 
 .container {
@@ -163,68 +119,6 @@ b {
     grid-template-columns: auto;
 }
 
-aside {
-    display: flex;
-}
-
-aside .toggle {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-top: 1.4rem;
-}
-
-aside .toggle .logo {
-    display: flex;
-    gap: 0.5rem;
-}
-
-aside .toggle .logo img {
-    width: 2rem;
-    height: 2rem;
-}
-
-aside .toggle .close {
-    padding-right: 1rem;
-    display: none;
-}
-
-aside .sidebar {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--color-white);
-    box-shadow: var(--box-shadow);
-    border-radius: 15px;
-    position: relative;
-    width: 100%;
-    transition: all 0.3s ease;
-}
-
-aside .sidebar:hover {
-    box-shadow: none;
-}
-
-aside .sidebar a {
-    display: flex;
-    align-items: center;
-    height: 3.7rem;
-    gap: 1rem;
-    position: relative;
-    margin-left: 2rem;
-    transition: all 0.3s ease;
-}
-
-aside .img-user {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 3vw;
-    margin-bottom: 3vw;
-
-    img {
-        width: 80%;
-    }
-}
 
 header span {
     font-size: 1.6rem;
@@ -239,17 +133,6 @@ aside .sidebar a:last-child {
 
 
 
-aside .sidebar a:hover {
-    color: var(--color-primary);
-}
-
-aside .sidebar a:hover span {
-    margin-left: 0.6rem;
-}
-
-
-
-
 .analyse {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -258,11 +141,10 @@ aside .sidebar a:hover span {
 
 .analyse>div {
     background: var(--color-background);
-    color: var(--color-white);
+    color: #fff;
     backdrop-filter: blur(10px);
     padding: var(--card-padding);
     border-radius: var(--card-border-radius);
-    box-shadow: 0rem 2rem 3rem ;
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -324,10 +206,9 @@ aside .sidebar a:hover span {
 
 .chart_card {
     background-color: var(--color-background);
-    color: var(--color-white);
+    color: #fff;
     backdrop-filter: blur(10px);
     border-radius: var(--card-border-radius);
-    box-shadow: 0 2rem 3rem;
     padding: 0.5vw;
 
 }

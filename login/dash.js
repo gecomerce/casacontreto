@@ -27,7 +27,7 @@ window.addEventListener('load', () => {
                 label: {
                     show: true,
                     position: 'outside',
-                    color: "#0cc9d6"
+                    color: "#fff"
                 },
                 labelLine: { show: true, length: 5, length2: 2 },
                 data: []
@@ -51,7 +51,7 @@ window.addEventListener('load', () => {
         myChart.setOption({
             series: [{
                 data,
-                axisLabel: { color: '#0cc9d6', fontSize: 13 }
+                axisLabel: { color: '#fff', fontSize: 13 }
             }]
         });
     }
@@ -115,7 +115,7 @@ window.addEventListener('load', () => {
             xAxis: {
                 type: 'category',
                 data: meses,
-                axisLabel: { color: '#0cc9d6', fontSize: 13 }
+                axisLabel: { color: '#fff', fontSize: 13 }
             },
             yAxis: { type: 'value', show: false },
             series: [
@@ -232,7 +232,7 @@ window.addEventListener('load', () => {
                 type: 'category',
                 data: categorias,
                 splitLine: { show: false },
-                axisLabel: { color: '#0cc9d6', fontSize: 13 }
+                axisLabel: { color: '#fff', fontSize: 13 }
             },
             series: [{
                 type: 'bar',
@@ -242,7 +242,7 @@ window.addEventListener('load', () => {
                     show: true,
                     position: 'right',
                     formatter: p => p.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-                    color: '#0cc9d6',
+                    color: '#fff',
                     fontSize: 12,
                 }
             }]
