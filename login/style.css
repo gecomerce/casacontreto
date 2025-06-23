@@ -110,7 +110,6 @@ b {
 }
 
 
-
 .container {
     display: grid;
     width: 97%;
@@ -129,7 +128,6 @@ aside .sidebar a:last-child {
     bottom: 2rem;
     width: 100%;
 }
-
 
 
 .analyse {
@@ -260,10 +258,6 @@ aside .sidebar a:last-child {
     .analyse>div {
         height: 20vw;
     }
-
-
-
-
 
 
 }
