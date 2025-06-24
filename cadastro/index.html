@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa concretto</title>
+    <link rel="shortcut icon" href="/assets/images/logo.jpg" type="image/x-icon">
+</head>
+
+
+<body>
+
+    <div id="loading">
+
+        <div class="spinner" id="spinner"></div>
+
+    </div>
+
+
+    <form id="loginForm" class="form" style="display: flex; flex-direction: column;">
+
+        <img src="logo.jpg" style="display: none;">
+
+        <div class="campos" style="display: flex; flex-direction: column;">
+
+            <label for="user">Nome Completo</label>
+
+            <input type="text" id="nome_comprador">
+
+            <label for="cpf">CPF</label>
+
+            <input id="cpf" type="number">
+
+            <label for="rg">RG</label>
+
+            <input type="number" id="rg">
+
+            <label for="data_nasc">Data Nascimento</label>
+
+            <input type="date" id="data_nasc">
+
+            <label for="renda_bruta">Renda Bruta</label>
+
+            <input type="number" id="renda_bruta">
+
+            <label for="profissao">Profissão</label>
+
+            <input type="text" id="profissao">
+
+            <label for="possui_fgts">Possui FGTS?</label>
+
+            <select id="possui_fgts">
+
+                <option value="sim">Sim</option>
+
+                <option value="nao">Não</option>
+
+            </select>
+
+            <label for="minha_casa">Já utilizou benefício do Minha Casa Minha Vida?</label>
+
+            <select id="minha_casa">
+
+                <option value="sim">Sim</option>
+
+                <option value="nao">Não</option>
+
+            </select>
+
+            <h3>Endereço</h3>
+
+            <label for="rua">Rua:</label>
+
+            <input type="text" id="rua">
+
+            <label for="numero">Nº</label>
+
+            <input type="number" id="numero">
+
+            <label for="cidade">Cidade</label>
+
+            <input type="text" id="cidade">
+
+            <label for="uf">UF</label>
+
+
+        </div>
+
+        <button type="submit" id="btn_enviar">Enviar</button>
+
+
+    </form>
+
+
+
+</body>
+
+
+</html>
