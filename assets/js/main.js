@@ -26,26 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  //===== Section Menu Active
-  const scrollLinks = document.querySelectorAll(".page-scroll");
-  window.addEventListener("scroll", function () {
-    const scrollPos = window.scrollY;
 
-    scrollLinks.forEach(link => {
-      const section = document.querySelector(link.hash);
-      if (section) {
-        const sectionTop = section.offsetTop - 73;
-        if (scrollPos >= sectionTop) {
-          link.parentElement?.classList.add("active");
-          [...link.parentElement?.parentElement?.children || []].forEach(li => {
-            if (li !== link.parentElement) {
-              li.classList.remove("active");
-            }
-          });
-        }
-      }
-    });
-  });
 
   //===== Navbar collapse on link click
   document.querySelectorAll(".navbar-nav a").forEach(link => {
