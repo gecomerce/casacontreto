@@ -557,6 +557,10 @@ p.form-message.error.form-message.error {
   background-color: #FFB316;
 }
 
-#navbarSupportedContent {
-  display: none;
+.collapse {
+    display: none;
+}
+
+.collapse.show {
+    display: block;
 }
