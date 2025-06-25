@@ -475,8 +475,10 @@ p.form-message.error.form-message.error {
   z-index: -1;
 }
 
-.footer_about img {
-  max-width: 50%;
+
+
+.footer_widget img {
+  max-width: 10vw;
 }
 
 .footer_about p {
