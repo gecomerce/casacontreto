@@ -49,7 +49,15 @@ a:hover {
   height: 100%;
 }
 
-
+#features{
+  .container{
+    .row{
+      div{
+        cursor: pointer;
+      }
+    }
+  }
+}
 
 /*===== All Button Style =====*/
 .section_title .title {
@@ -293,6 +301,30 @@ a:hover {
   margin-top: 45px;
 }
 
+.container-parceiro {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1vw;
+  align-items: center;
+  justify-content: center;
+  margin: 10vh auto;
+
+  h4 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+  }
+}
+
+.parceiro-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 /*===========================
        05.SERVICES css 
 ===========================*/
@@ -328,47 +360,7 @@ a:hover {
 
 
 
-/*===========================
-       07.COUNTER css 
-===========================*/
-.counter_area {
-  position: relative;
-  z-index: 5;
-  overflow: hidden;
-  border-top-left-radius: 150px;
-  border-bottom-right-radius: 150px;
-}
 
-.counter_area::before {
-  position: absolute;
-  content: '';
-  top: 0;
-  left: 0;
-  background-color: rgba(26, 49, 84, 0.79);
-  width: 100%;
-  height: 100%;
-}
-
-.single_counter .counter_icon i {
-  font-size: 60px;
-  line-height: 60px;
-  color: #fff;
-}
-
-
-.single_counter .counter_content {
-  margin-top: 25px;
-}
-
-.single_counter .counter_content span {
-  font-size: 44px;
-  font-weight: 700;
-  color: #fff;
-}
-
-.single_counter .counter_content p {
-  color: #fff;
-}
 
 /*===========================
         10.BRAND css 
@@ -386,50 +378,7 @@ a:hover {
 }
 
 
-/*===========================
-       11.CONTACT css 
-===========================*/
-p.form-message.success,
-p.form-message.error {
-  font-size: 16px;
-  color: #1A3154;
-  background: #f7f7fd;
-  padding: 10px 15px;
-  margin-top: 30px;
-}
 
-p.form-message.success.form-message.error,
-p.form-message.error.form-message.error {
-  color: #f00;
-}
-
-.contact_form .single_form {
-  margin-top: 30px;
-}
-
-.contact_form .single_form textarea,
-.contact_form .single_form input {
-  width: 100%;
-  height: 55px;
-  padding: 0 25px;
-  border: 1px solid #677284;
-  border-radius: 5px;
-}
-
-.contact_form .single_form textarea:focus,
-.contact_form .single_form input:focus {
-  border: 1px solid #FFB316;
-}
-
-.contact_form .single_form textarea {
-  padding-top: 15px;
-  resize: none;
-  height: 125px;
-}
-
-.contact_info p {
-  margin-top: 15px;
-}
 
 .single_info {
   margin-top: 30px;
@@ -556,9 +505,9 @@ p.form-message.error.form-message.error {
 }
 
 .collapse {
-    display: none;
+  display: none;
 }
 
 .collapse.show {
-    display: block;
+  display: block;
 }
