@@ -163,10 +163,6 @@ a:hover {
   color: #222;
 }
 
-.sticky .navbar-nav .nav-item.active>a,
-.sticky .navbar-nav .nav-item:hover>a {
-  color: #FFB316;
-}
 
 /*===== SLIDER =====*/
 .single_slider {
