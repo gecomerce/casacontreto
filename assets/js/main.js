@@ -13,7 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  //===== Sticky Header
+// Dimanismo de transicao de logo
+
+
   window.addEventListener("scroll", function () {
     const header = document.querySelector(".header_navbar");
     const logo = document.querySelector(".header_navbar img");
@@ -22,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (logo) logo.src = "assets/images/logo.png";
     } else {
       header?.classList.add("sticky");
-      if (logo) logo.src = "assets/images/logo.jpg";
+      if (logo) logo.src = "assets/images/logo2.png";
     }
   });
 
