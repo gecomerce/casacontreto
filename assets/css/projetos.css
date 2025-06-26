@@ -16,10 +16,10 @@ body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
     width: 100%;
-    background-image: url('../images/bg-image.png');
+    /* background-image: url('../images/bg-image.png');
     background-position: center;
-    background-size: cover;
-    /* background-color: var(--background-color); */
+    background-size: cover; */
+    background-color: var(--background-color);
 }
 
 section {
@@ -32,7 +32,6 @@ section {
     h1 {
         color: var(--text-color);
         font-size: 4vw;
-        /* box-shadow: 8px 14px 34px -4px rgba(0, 0, 0, 0.63); */
     }
 }
 
@@ -54,6 +53,13 @@ section {
     border-radius: 0.5vw;
     color: var(--text-color);
     box-shadow: 8px 14px 34px -4px rgba(0, 0, 0, 0.63);
+    transition: ease-in-out 0.5s;
+    cursor: pointer;
+}
+
+.card:hover{
+    transform: scale(1.025);
+     box-shadow: 8px 14px 36px 10px rgba(0, 0, 0, 0.63);
 }
 
 
