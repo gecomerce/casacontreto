@@ -175,7 +175,8 @@ a:hover {
   height: 750px;
   position: relative;
   overflow: hidden;
-  border-bottom-left-radius: 200px;
+  /* border-bottom-left-radius: 200px; */
+
 }
 
 .single_slider::before {
@@ -401,7 +402,7 @@ a:hover {
   position: relative;
   z-index: 5;
   overflow: hidden;
-  border-top-left-radius: 150px;
+  /* border-top-left-radius: 150px; */
 }
 
 .footer_area::before {
