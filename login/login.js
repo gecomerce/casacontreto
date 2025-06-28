@@ -1,74 +1,122 @@
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", function () {
+
+  // Função que mostra o dashboard (iframe) e oculta o login
+  function mostrarDashboard() {
+    const loginContainer = document.getElementById("container-login");
+    if (loginContainer) loginContainer.style.display = "none";
+
+    const telaContainer = document.querySelector(".screen-logged");
+    if (telaContainer) telaContainer.style.display = "block";
+
+    const iframe = document.getElementById("tela");
+    if (iframe) iframe.src = "dash.html";
+  }
+
+  // Se já está logado, mostra direto o dashboard e sai da função
+  if (this.sessionStorage.getItem("logon") === "1") {
+    mostrarDashboard();
+    return;
+  }
+
   configurarFormularioLogin();
-});
 
-function configurarFormularioLogin() {
-  const loginForm = document.getElementById("loginForm");
-  loginForm.addEventListener("submit", async function (event) {
-    event.preventDefault();
+  function configurarFormularioLogin() {
+    const loginForm = document.getElementById("loginForm");
+    if (!loginForm) return;
 
-    const password = document.getElementById("password").value.trim();
-    const usuario = document.getElementById("user").value;
+    loginForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
 
+      const username = document.getElementById("username").value.trim().toLowerCase();
+      const password = document.getElementById("password").value.trim();
 
-    if (!password || !usuario) {
-      exibirAlerta("A senha é obrigatória!");
+      if (!username || !password) {
+        exibirAlerta("Usuário e senha são obrigatórios!");
+        return;
+      }
+
+      await validarCredenciais(username, password);
+    });
+  }
+
+  async function obterDadosPlanilha() {
+    try {
+      const response = await fetch("keys.json");
+      if (!response.ok) throw new Error("Erro ao carregar arquivo keys.json");
+
+      const data = await response.json();
+      if (!data.length || !data[0].base) throw new Error("Formato inválido do JSON.");
+
+      const planilhaURL = data[0].base;
+
+      const planilhaResponse = await fetch(planilhaURL);
+      if (!planilhaResponse.ok) throw new Error("Erro ao carregar a planilha.");
+
+      const csvText = await planilhaResponse.text();
+
+      return processarCSV(csvText);
+    } catch (error) {
+      console.error("Erro:", error);
+      exibirAlerta("Erro ao carregar dados.");
+      return [];
+    }
+  }
+
+  function processarCSV(csvText) {
+    const linhas = csvText.trim().split(/\r?\n/).filter(l => l);
+    const cabecalho = linhas[0].split(",").map(h => h.trim().toLowerCase());
+
+    return linhas.slice(1).map(linha => {
+      const valores = linha.split(",").map(v => v.trim());
+      let obj = {};
+      cabecalho.forEach((chave, index) => {
+        obj[chave] = valores[index] || "";
+      });
+      return obj;
+    });
+  }
+
+  async function validarCredenciais(username, password) {
+    const usuarios = await obterDadosPlanilha();
+
+    const user = usuarios.find(u =>
+      u.user?.toLowerCase() === username &&
+      u.password === password // ajuste se a senha for criptografada
+    );
+
+    if (!user) {
+      exibirAlerta("Usuário ou senha inválidos.");
       return;
     }
 
-
-    await validarCredenciais(password, usuario);
-  });
-}
-
-async function validarCredenciais(password, usuario) {
-  const spinner = document.getElementById('loading');
-  spinner.style.display = 'flex';
-
-  try {
-    const response = await fetch("https://barretoapps.com.br/login_barreto", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        usuario: usuario,
-        senha: password 
-      })
-    });
-
-    const result = await response.json();
-    console.log("Resposta do backend:", result);
-
-    if (response.ok && result.success) {
-      spinner.style.display = 'none';
-      realizarLogin(result);
-    } else {
-      exibirAlerta(result.message || "Senha incorreta!");
-      spinner.style.display = 'none';
+    if ((user.status || "").toLowerCase() !== "liberado") {
+      exibirAlerta("Usuário bloqueado.");
+      return;
     }
-  } catch (err) {
-    console.error("Erro no fetch:", err);
-    exibirAlerta("Erro ao tentar logar.");
-    spinner.style.display = 'none';
-  }
-}
 
-function realizarLogin(userData) {
-  
-
-  let empresa = userData.empresa || "";
-  if (empresa.startsWith('"') && empresa.endsWith('"')) {
-    empresa = empresa.slice(1, -1);
+    realizarLogin(user);
   }
 
-  document.getElementById('container-login').style.display = "none";
-  sessionStorage.setItem("logon", "1");
-  document.getElementById('tela').src = "dash.html";
+  function realizarLogin(userData) {
+    sessionStorage.setItem("logon", "1");
+    sessionStorage.setItem("currentUser", userData.user);
+    sessionStorage.setItem("user_name", userData.nickname || userData.user);
 
-}
+    mostrarDashboard();
 
+    window.dispatchEvent(new Event("storage"));
+  }
 
-function exibirAlerta(mensagem) {
-  const alert = document.getElementById("alert");
-  alert.innerText = mensagem;
-  alert.style.display = "block";
-}
+  function exibirAlerta(mensagem) {
+    const alert = document.getElementById("alert");
+    if (!alert) return;
+
+    alert.innerText = mensagem;
+    alert.style.display = "block";
+
+    setTimeout(() => {
+      alert.style.display = "none";
+    }, 4000);
+  }
+
+});

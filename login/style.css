@@ -109,6 +109,11 @@ b {
     }
 }
 
+.screen-logged {
+    display: none;
+}
+
+
 
 .container {
     display: grid;
