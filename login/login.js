@@ -1,20 +1,19 @@
 window.addEventListener("load", function () {
 
-  // Função que mostra o dashboard (iframe) e oculta o login
-  function mostrarDashboard() {
+  function mostrarTela() {
     const loginContainer = document.getElementById("container-login");
     if (loginContainer) loginContainer.style.display = "none";
 
     const telaContainer = document.querySelector(".screen-logged");
-    if (telaContainer) telaContainer.style.display = "block";
+    if (telaContainer) telaContainer.style.display = "flex";
 
     const iframe = document.getElementById("tela");
     if (iframe) iframe.src = "dash.html";
   }
 
-  // Se já está logado, mostra direto o dashboard e sai da função
+
   if (this.sessionStorage.getItem("logon") === "1") {
-    mostrarDashboard();
+    mostrarTela();
     return;
   }
 
@@ -81,7 +80,7 @@ window.addEventListener("load", function () {
 
     const user = usuarios.find(u =>
       u.user?.toLowerCase() === username &&
-      u.password === password // ajuste se a senha for criptografada
+      u.password === password 
     );
 
     if (!user) {
@@ -102,7 +101,7 @@ window.addEventListener("load", function () {
     sessionStorage.setItem("currentUser", userData.user);
     sessionStorage.setItem("user_name", userData.nickname || userData.user);
 
-    mostrarDashboard();
+    mostrarTela();
 
     window.dispatchEvent(new Event("storage"));
   }
