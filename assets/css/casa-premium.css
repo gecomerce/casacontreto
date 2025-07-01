@@ -13,58 +13,42 @@
 }
 
 body {
-    font-family: "Poppins", sans-serif;
-    height: 100vh;
+    height: 100%;
     width: 100%;
+    font-family: "Poppins", sans-serif;
     background-color: var(--background-color);
+}
+
+h1 {
+    color: var(--text-color);
+    font-size: 4vw;
+    margin: 3vw;
 }
 
 section {
     display: flex;
+    width: 100%;
     flex-direction: column;
     text-align: center;
-    justify-content: space-evenly;
-    height: 90vh;
-
-    h1 {
-        color: var(--text-color);
-        font-size: 4vw;
-    }
+    align-items: center;
+    justify-content: space-between;
 }
 
 .container {
-    display: grid;
-    margin: 0 auto;
     gap: 2vw;
-    grid-template-columns: repeat(3, 1fr);
-}
-
-
-.card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    margin-bottom: 10vh;
+}
+
+
+.foto img {
     padding: 2vw;
-    height: 27vw;
-    background-color: var(--card-color);
+    width: 50vw;
     border-radius: 0.5vw;
-    color: var(--text-color);
+    background-color: var(--card-color);
     box-shadow: 8px 14px 34px -4px rgba(0, 0, 0, 0.63);
-    transition: ease-in-out 0.3s;
-    cursor: pointer;
 }
-
-.card:hover{
-    transform: scale(1.025);
-    box-shadow: 8px 14px 36px 10px rgba(0, 0, 0, 0.63);
-}
-
-
-.card img {
-    width: 20vw;
-}
-
-/* -------------------------------------------------------- */
 
 @media screen and (max-width: 768px) and (orientation: portrait){
 
@@ -84,18 +68,16 @@ section {
         display: flex;
         flex-direction: column;
         gap: 5vw;
-        padding-bottom: 10vh;
+        padding-bottom: 15vh;
     }
 
-    .card {
-        width: 70vw;
+    .foto img {
+        width: 90vw;
         align-items: center;
         height: auto;
         border-radius: 2vw;
+        padding: 3vw;
 
-        img {
-            width: 65vw;
-        }
     }
 
 
