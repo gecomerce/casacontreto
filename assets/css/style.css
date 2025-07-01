@@ -172,7 +172,7 @@ a:hover {
 
 /*===== SLIDER =====*/
 .single_slider {
-  height: 750px;
+  height: 100vh;
   position: relative;
   overflow: hidden;
   /* border-bottom-left-radius: 200px; */

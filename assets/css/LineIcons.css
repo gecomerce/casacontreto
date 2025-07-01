@@ -826,9 +826,9 @@ p {
 }
 @media (max-width: 767px) {
 
-  img{
+  /* img{
     display: none;
-  }
+  } */
 
   .footer_link_wrapper .footer_link {
     width: 100%; } }

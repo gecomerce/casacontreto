@@ -50,7 +50,10 @@ section {
     box-shadow: 8px 14px 34px -4px rgba(0, 0, 0, 0.63);
 }
 
-@media screen and (max-width: 768px) and (orientation: portrait){
+/* -------------------------------------------------------------------- */
+
+
+@media screen and (max-width: 768px){
 
     section {
         height: 100vh;
@@ -79,6 +82,5 @@ section {
         padding: 3vw;
 
     }
-
 
 }
