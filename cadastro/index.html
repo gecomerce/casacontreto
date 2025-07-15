@@ -18,217 +18,55 @@
 
     <form id="loginForm" class="form" style="display: flex; flex-direction: column; width: 90%;">
 
-        <img src="logo.jpg" style="display: none;">
 
         <div class="campos" style="display: flex; flex-direction: column;">
 
-            <label for="user">Nome Completo</label>
+            <h2 for="user">Custos Relacionados com a aquisição do Terreno:</h2>
 
-            <input type="text" id="nome_comprador">
 
-            <label for="cpf">CPF</label>
+            <label for="valor_aquisicao">Valor de Aquisição</label>
+            <input type="number" id="valor_aquisicao">
 
-            <input id="cpf" type="number">
+            <label for="">ITBI - 2%:</label>
 
-            <label for="rg">RG</label>
+            <!-- ---------------------------------------------->
 
-            <input type="number" id="rg">
+            <h2 for="user">Custos Relacionados a Obra:</h2>
 
-            <label for="data_nasc">Data Nascimento</label>
+            <label for="qtd_unidades">Quantidade de Unidades</label>
+            <input type="number" id="qtd_unidades">
 
-            <input type="date" id="data_nasc">
+            <label for="metragem_da_obra">Área de cada unidade(metro quadrado)</label>
+            <input type="number" id="metragem_da_obra">
 
-            <label for="renda_bruta">Renda Bruta</label>
+            <label for="monte_sua_casa">Construção- Monte sua Casa</label>
+            <input type="number" id="monte_sua_casa">
 
-            <input type="number" id="renda_bruta">
+            <!-- ---------------------------------------------->
 
-            <label for="profissao">Profissão</label>
 
-            <input type="text" id="profissao">
+            <h2 for="user">Custo Obra e Financiamento</h2>
 
-            <label for="possui_fgts">Possui FGTS?</label>
+            <label for="valor_condominio">condominio</label>
+            <input type="number" id="valor_condominio">
 
-            <select id="possui_fgts">
+            <label for="valor_agua_energia">luz e àgua</label>
+            <input type="number" id="valor_agua_energia">
 
-                <option value="sim">Sim</option>
 
-                <option value="nao">Não</option>
+            <label for="habitese">HABITE-SE + AVERBAÇÃO + ISS+ INSS (despachante)</label>
+            <input type="number" id="habitese">
 
-            </select>
 
-            <label for="minha_casa">Já utilizou benefício do Minha Casa Minha Vida?</label>
 
-            <select id="minha_casa">
-
-                <option value="sim">Sim</option>
-
-                <option value="nao">Não</option>
-
-            </select>
-
-            <h3>Endereço</h3>
-
-            <label for="rua">Rua:</label>
-
-            <input type="text" id="rua">
-
-            <label for="numero">Nº</label>
-
-            <input type="number" id="numero">
-
-            <label for="cidade">Cidade</label>
-
-            <input type="text" id="cidade">
-
-            <label for="uf">UF</label>
-
-            <select id="uf">
-
-                <option value="ro">RO</option>
-                <option value="ac">AC</option>
-                <option value="am">AM</option>
-                <option value="rr">RR</option>
-                <option value="pa">PA</option>
-                <option value="ap">AP</option>
-                <option value="to">TO</option>
-                <option value="ma">MA</option>
-                <option value="pi">PI</option>
-                <option value="ce">CE</option>
-                <option value="rn">RN</option>
-                <option value="pb">PB</option>
-                <option value="pe">PE</option>
-                <option value="al">AL</option>
-                <option value="se">SE</option>
-                <option value="ba">BA</option>
-                <option value="mg">MG</option>
-                <option value="es">ES</option>
-                <option value="rj">RJ</option>
-                <option value="sp">SP</option>
-                <option value="pr">PR</option>
-                <option value="sc">SC</option>
-                <option value="rs">RS</option>
-                <option value="ms">MS</option>
-                <option value="mt">MT</option>
-                <option value="go">GO</option>
-                <option value="df">DF</option>
-
-            </select>
-
-            <label for="info_terreno">Possui terreno?</label>
-
-            <select id="info_terreno">
-
-                <option value="sim">Sim</option>
-
-                <option value="nao">Não</option>
-
-            </select>
-
-            <label for="terreno_quitado">O terreno está quitado?</label>
-
-            <select id="terreno_quitado">
-
-                <option value="sim">Sim</option>
-
-                <option value="nao">Não</option>
-
-            </select>
-
-            <label for="parcelado_banco_loteadora">Parcelado por Banco ou Loteadora?</label>
-
-            <select id="parcelado_banco_loteadora">
-
-                <option value="banco">Banco</option>
-
-                <option value="loteadora">Loteadora</option>
-
-            </select>
-
-            <label for="valor_terreno">Qual o valor do terreno no ato da compra?</label>
-
-            <input type="number" id="valor_terreno">
-
-            <label for="valor_amortizado">Qual o valor já amortizado?</label>
-
-            <input type="number" id="valor_amortizado">
-
-            <label for="comum_ou_condominio">Rua comum ou condomínio?</label>
-
-            <select id="comum_ou_condominio">
-
-                <option value="comunm">Comum</option>
-
-                <option value="condominio">Condomínio</option>
-
-            </select>
-
-            <label for="estado_civil">Estado Civil</label>
-
-            <select id="estado_civil">
-
-                <option value="solteiro">Solteiro</option>
-
-                <option value="casado">Casado</option>
-
-                <option value="divorciado">Divorciado</option>
-
-                <option value="viuvo">Viúvo</option>
-
-            </select>
-
-            <label for="atendido_imobiliaria">Está sendo atendido por alguma imobiliária?</label>
-
-            <select id="atendido_imobiliaria">
-
-                <option value="sim">Sim</option>
-
-                <option value="nao">Não</option>
-
-            </select>
-
-            <label for="imobiliária">Imobiliaria</label>
-
-            <select id="imobiliária">
-
-                <option value="Imobiliaria A">Imobiliaria A</option>
-                <option value="Imobiliaria B">Imobiliaria B</option>
-                <option value="Imobiliaria C">Imobiliaria C</option>
-                <option value="Imobiliaria D">Imobiliaria D</option>
-
-            </select>
-
-            <label for="corretor_imobiliaria">Selecione um Corretor da Imobiliária:</label>
-
-            <select id="corretor_imobiliaria">
-
-                <option value="Corretor A">Corretor A</option>
-
-                <option value="Corretor B">Corretor B</option>
-                
-                <option value="Corretor C">Corretor C</option>
-
-            </select>
-
-            <label for="corretor_autonomo">Está sendo atendido por algum corretor autônomo?</label>
-
-            <select id="corretor_autonomo">
-
-                <option value="sim">Sim</option>
-
-                <option value="nao">Não</option>
-
-
-            </select>
 
 
 
         </div>
 
-        <button type="submit" id="btn_enviar">Enviar</button>
-
+        <button type="submit" id="btn_enviar">Calcular</button>
 
     </form>
-
 
 
 </body>
