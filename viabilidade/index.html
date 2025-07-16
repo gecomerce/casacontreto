@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
 <head>
@@ -7,6 +8,7 @@
     <title>Casa concretto</title>
     <link rel="shortcut icon" href="/assets/images/logo.jpg" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 
 <body>
@@ -26,13 +28,12 @@
 
             <h2>Custos Relacionados com a aquisição do Terreno:</h2>
 
-
             <label for="valor_aquisicao">Valor de Aquisição</label>
-            <input type="number" id="valor_aquisicao">
+            <input type="text" id="valor_aquisicao" placeholder="R$ 0,00">
 
-            <label for="">ITBI - 2%:</label>
+            <label for="">ITBI 2%:</label>
 
-            <h2>Resultado:</h2>
+            <h2 id="itbi_resultado">Resultado:</h2>
 
 
         </div>
@@ -46,15 +47,15 @@
             <h2>Custos Relacionados a Obra:</h2>
 
             <label for="qtd_unidades">Quantidade de Unidades</label>
-            <input type="number" id="qtd_unidades">
+            <input type="number" id="qtd_unidades" min="0">
 
-            <label for="metragem_da_obra">Área de cada unidade(metro quadrado)</label>
-            <input type="number" id="metragem_da_obra">
+            <label for="metragem_da_obra">Área de cada unidade (m²)</label>
+            <input type="number" id="metragem_da_obra" min="0" step="0.01">
 
-            <label for="custo_por_metro">Custo (metro quadrado)</label>
-            <input type="number" id="custo_por_metro">
+            <label for="custo_por_metro">Custo (por metro quadrado)</label>
+            <input type="text" id="custo_por_metro" placeholder="R$ 0,00">
 
-            <h2>Resultado:</h2>
+            <h2 id="custo_total_obra">Resultado: R$ 0,00</h2>
 
 
         </div>
@@ -66,31 +67,37 @@
 
             <h2>Custo Obra e Financiamento</h2>
 
-            <label for="valor_condominio">Condominio</label>
-            <input type="number" id="valor_condominio">
+            <label for="valor_condominio">Condomínio</label>
+            <input type="text" id="valor_condominio" placeholder="R$ 0,00">
 
-            <label for="valor_agua_energia">luz e àgua</label>
-            <input type="number" id="valor_agua_energia">
+            <label for="valor_agua_energia">Luz e água</label>
+            <input type="text" id="valor_agua_energia" placeholder="R$ 0,00">
+
+            <label for="habitese">HABITE-SE + Averbação + ISS + INSS (despachante)</label>
+            <input type="text" id="habitese" placeholder="R$ 0,00">
+
+            <h2 id="resultado_financiamento">Resultado: R$ 0,00</h2>
+
+        </div>
 
 
-            <label for="habitese">HABITE-SE + AVERBAÇÃO + ISS+ INSS (despachante)</label>
-            <input type="number" id="habitese">
 
+        <div class="card">
 
             <h2>Cálculo do Resultado Operacional</h2>
-            <label id="preco_bruto_terreno">100000</label>
-            <label id="custo_obra">Custo Obra e Financiamento: 10000</label>
-            <label id="custo_obra">Custo Obra Bruto: 10000</label>
 
-            <h2>Resultado:</h2>
+            <label id="preco_bruto_terreno">Custo Bruto do Terreno: </label>
+            <label id="custo_obra_financiamento">Custo Obra e Financiamento: </label>
+            <label id="custo_obra_bruto">Custo Obra Bruto:</label><br>
 
+            <h2 id="resultado_operacional">Resultado:</h2>
+          
         </div>
 
 
         <!-- ---------------------------------------------->
 
         <div class="card">
-
 
             <h2>VGV (Valor Geral de Venda)</h2>
 
@@ -99,11 +106,11 @@
 
         </div>
 
+
         <!-- ---------------------------------------------->
 
 
         <div class="card">
-
 
             <h2>Corretagem</h2>
 
@@ -114,7 +121,7 @@
         </div>
 
 
-        <button type="submit" id="btn_enviar">Calcular</button>
+        <button type="button" id="btn_enviar">Calcular</button>
 
     </form>
 

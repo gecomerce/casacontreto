@@ -1,23 +1,22 @@
-
-
 @import url('https://fonts.googleapis.com/css2?family=Pontano+Sans:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 
-:root{
+:root {
     --bg: #ffffff;
     --container-color: rgb(0, 168, 180);
     --color-text: #0b063f;
+    --font-size: 4vw;
 }
 
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 
-body{
+body {
     background-color: var(--bg);
     display: flex;
     flex-direction: column;
@@ -26,19 +25,19 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
-#title{
+#title {
     margin-top: 5vw;
     margin-bottom: 2vw;
     color: var(--container-color);
 }
 
-.form{
+.form {
     display: flex;
     flex-direction: column;
     gap: 2vw;
 }
 
-.card{
+.card {
     display: flex;
     flex-direction: column;
     gap: 1vw;
@@ -48,7 +47,7 @@ body{
     background-color: var(--container-color);
     color: var(--bg);
 
-    input{
+    input {
         width: 90%;
         outline: none;
         font-size: 1vw;
@@ -57,17 +56,17 @@ body{
         border-radius: 0.2vw;
     }
 
-    
+
 }
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 
-#btn_enviar{
+#btn_enviar {
     background-color: var(--container-color);
     color: var(--bg);
     margin: 2vw;
@@ -76,6 +75,54 @@ input[type="number"]::-webkit-outer-spin-button {
     font-size: 1.5vw;
     padding: 0.5vw;
     cursor: pointer;
-    margin-bottom: 10vw;
+    margin-bottom: 10vh;
 }
 
+/* --------------------------------------------------------- */
+
+@media screen and (max-width: 968px), screen and (orientation: portrait) { 
+
+    #title {
+        font-size: 6vw;
+        margin-bottom: 8vw;
+    }
+
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7vw;
+
+        h2 {
+            font-size: 5vw;
+            text-align: center;
+        }
+    }
+
+    .card {
+        width: 90%;
+        gap: 3vw;
+        padding: 5vw;
+        border-radius: 2vw;
+
+        input {
+            font-size: 4vw;
+            border-radius: 1vw;
+            padding: 2vw;
+        }
+
+        label{
+            font-size: var(--font-size);
+            text-align: center;
+        }
+    }
+
+    #btn_enviar {
+        width: 90vw;
+        font-size: 6vw;
+        border-radius: 2vw;
+        padding: 2vw;
+    }
+
+}
