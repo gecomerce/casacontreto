@@ -253,7 +253,8 @@ iframe {
         outline: none;
         height: 8vw;
         width: 100%;
-        color: var(--cor-container);
+        color: var(--cor-texto);
+        font-size: 5vw;
     }
 
     button {
