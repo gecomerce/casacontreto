@@ -1,26 +1,25 @@
-
-:root{
-    --bg : #ffffff;
+:root {
+    --bg: #ffffff;
     --cor-texto: #080707;
     --cor-container: #f2f3f3;
 }
 
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     max-width: 100vw;
 }
 
-body{
+body {
     height: 100vh;
     width: 100vw;
     color: var(--bg);
     overflow-y: hidden;
 }
 
-#menu-icon{
-    width: 1.5vw;
+#menu-icon {
+    font-size: 2.5vw;
     cursor: pointer;
 }
 
@@ -35,7 +34,7 @@ body{
     transition: 0.3s;
 }
 
-.sidebar img{
+.sidebar img {
     width: 120px;
     margin-bottom: 5vw;
 }
@@ -69,17 +68,17 @@ body{
     cursor: pointer;
 }
 
-.logo{
+.logo {
     width: 15vw;
     margin-bottom: 2vw;
     margin-top: 2vw;
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center ;
+    align-items: center;
     position: absolute;
     z-index: 1;
     background-color: var(--bg);
@@ -87,7 +86,7 @@ body{
     height: 100vh;
 }
 
-form{
+form {
     margin-top: 2vw;
     color: var(--bg);
     padding: 0.5vw;
@@ -100,29 +99,30 @@ form{
     border-radius: 4px;
     width: 25vw;
     height: auto;
-    box-shadow: 0rem 0.3rem 1rem black;;
+    box-shadow: 0rem 0.3rem 1rem black;
+    ;
 }
 
-input{
+input {
     outline: none;
     height: 1.5vw;
     width: 100%;
     color: var(--cor-texto);
 }
 
-.campos{
+.campos {
     display: flex;
     flex-direction: column;
     gap: 0.5vw;
     width: 90%;
 }
 
-label{
+label {
     font-weight: bold;
     color: var(--cor-texto);
 }
 
-button{
+button {
     margin-top: 1vw;
     color: #ffffff;
     border: none;
@@ -138,7 +138,7 @@ button{
     cursor: pointer;
 }
 
-.message{
+.message {
     color: red;
     font-weight: bold;
     height: 3vw;
@@ -146,7 +146,7 @@ button{
 }
 
 
-.msg{
+.msg {
     display: flex;
     justify-content: space-between;
     width: 100vw;
@@ -158,11 +158,11 @@ button{
 
 }
 
-.msg img{
+.msg img {
     width: 8vw;
 }
 
-.exit-btn{
+.exit-btn {
     background-color: #eccb0e;
     color: var(--cor-texto);
     font-weight: bold;
@@ -174,7 +174,7 @@ button{
     cursor: pointer;
 }
 
-.screen-logged{
+.screen-logged {
     height: 100vh;
     width: 100vw;
     position: fixed;
@@ -185,18 +185,18 @@ button{
 }
 
 
-iframe{
+iframe {
     height: 100vh;
     width: 100vw;
     border: none;
 }
 
 
-.desapear{
+.desapear {
     display: none;
 }
 
-#logged-message{
+#logged-message {
     text-transform: capitalize;
     display: flex;
     margin-left: 75vw;
@@ -209,7 +209,7 @@ iframe{
 
 @media (max-width: 900px) {
 
-    .form{
+    .form {
         justify-content: space-around;
         height: 100vh;
         width: 100vw;
@@ -217,21 +217,21 @@ iframe{
         margin: 0;
     }
 
-    .form img{
+    .form img {
         width: 50vw;
         margin-top: 30vw;
     }
 
-    #menu-icon{
-        width: 8vw;
+    #menu-icon {
+        font-size: 8vw;
     }
 
-    #user_photo{
+    #user_photo {
         display: none;
     }
-    
 
-    .sidebar img{
+
+    .sidebar img {
         width: 20vw;
         margin-bottom: 5vw;
     }
@@ -243,33 +243,33 @@ iframe{
         font-size: 10vw;
     }
 
-    label{
+    label {
         font-weight: bold;
         font-size: 8vw;
         margin: 2vw 0vw;
     }
 
-    input{
+    input {
         outline: none;
         height: 8vw;
         width: 100%;
         color: var(--cor-container);
-    } 
-    
-    button{
+    }
+
+    button {
         border: none;
         height: 10vw;
         width: 40%;
         border-radius: 3px;
     }
 
-    iframe{
+    iframe {
         height: 105vh;
         width: 100vw;
-        border: none; 
+        border: none;
     }
 
-    .msg{
+    .msg {
         display: flex;
         justify-content: space-between;
         width: 100vw;
@@ -277,7 +277,7 @@ iframe{
         padding: 0vw 2vw;
     }
 
-    .exit-btn{
+    .exit-btn {
         width: 20vw;
         padding: 0.6vw;
         font-size: 4vw;
@@ -286,16 +286,16 @@ iframe{
         cursor: pointer;
     }
 
-    #logged-message{
+    #logged-message {
         display: none;
     }
 
-    .msg img{
+    .msg img {
         width: 30vw;
     }
 
-    .message{
+    .message {
         margin-bottom: 50vw;
     }
-    
+
 }
