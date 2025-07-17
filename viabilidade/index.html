@@ -8,7 +8,9 @@
     <title>Casa concretto</title>
     <link rel="shortcut icon" href="/assets/images/logo.jpg" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="script.js"></script>
+    <script src="salvar_pdf.js"></script>
 </head>
 
 <body>
@@ -65,13 +67,17 @@
         <div class="card">
 
 
-            <h2>Custo Obra e Financiamento</h2>
+            <h2>Custo Operacional da Obra</h2>
 
             <label for="valor_condominio">Condomínio</label>
             <input type="text" id="valor_condominio" placeholder="R$ 0,00">
 
             <label for="valor_agua_energia">Luz e água</label>
             <input type="text" id="valor_agua_energia" placeholder="R$ 0,00">
+
+            <label for="">Custo do Dinheiro</label>
+            <input type="number">
+
 
             <label for="habitese">HABITE-SE + Averbação + ISS + INSS (despachante)</label>
             <input type="text" id="habitese" placeholder="R$ 0,00">
