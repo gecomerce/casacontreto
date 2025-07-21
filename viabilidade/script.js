@@ -1,14 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Custos Relacionados com a aquisicao do Terreno:
-
     const valor_aquisicao = document.getElementById('valor_aquisicao');
     const itbiResultado = document.getElementById('itbi_resultado');
+    const qtdUnidades = document.getElementById('qtd_unidades');
+    const metragem = document.getElementById('metragem_da_obra');
+    const custoMetro = document.getElementById('custo_por_metro');
+    const resultado = document.getElementById('custo_total_obra');
+    const lucro_construtor = document.getElementById('lucro_construtor');
+    const custo_obra_bruto_element = document.getElementById('custo_obra_bruto');
+    const condominioInput = document.getElementById('valor_condominio');
+    const aguaInput = document.getElementById('valor_agua_energia');
+    const custo_do_dinheiro = document.getElementById('custo_dinheiro');
+    const custo_iptu = document.getElementById('valor_iptu');
+    const resultadoFinanciamento = document.getElementById('resultado_financiamento');
+    const preco_bruto_terreno = document.getElementById('preco_bruto_terreno');
+    const custo_obra_financiamento = document.getElementById('custo_obra_financiamento');
+    const rgiResultado = document.getElementById('rgi');
+    const registroResultado = document.getElementById('certidao_etc');
+    const custoTotalTerrenoEl = document.getElementById('custo_total_terreno');
+    const habite_se = document.getElementById('habite_se');
+    const resultado_operacional = document.getElementById('resultado_operacional');
+    const total_total = document.getElementById('total_total');
+    const vgvInput = document.getElementById('vgv');
+
+    const corretor = document.getElementById('corretor');
+
+    const propaganda = document.getElementById('propaganda');
 
 
     const ibti = 0.02;
     const rgi = 0.0075;
+    const percentual_construtor = 0.1;
+    const porcentagem_corretor = 0.1;
+    const porcentagem_propaganda = 0.01;
+    const habite_se_porcentagem = 0.04;
 
+    // ----------------------------------------------------
 
     function formatarMoeda(valor) {
         return valor.toLocaleString('pt-BR', {
@@ -17,136 +44,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function limparValor(valor) {
-
+    function limparValorMoeda(valor) {
+        if (!valor) return 0;
         return Number(valor.replace(/\D/g, '')) / 100;
     }
 
-    // ------------------------------------------------------------
+    function limparValorTexto(texto) {
+        if (!texto) return 0;
+        return Number(texto.replace(/\D/g, '')) / 100;
+    }
+
+    // -----------------------------------------------
 
     function obterValorITBI() {
         const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
         return valorTerreno * ibti;
     }
 
-    // ------------------------------------------------------------
+    function obterCustoTotalObra() {
+        const unidades = parseFloat(qtdUnidades.value) || 0;
+        const area = parseFloat(metragem.value) || 0;
+        const custo = limparValorMoeda(custoMetro.value) || 0;
+        return unidades * area * custo;
+    }
 
     function calcularRGI() {
         const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
         const custoObra = obterCustoTotalObra();
-
         const baseCalculo = valorTerreno + custoObra;
         const valorRGI = baseCalculo * rgi;
-
-        const rgiResultado = document.getElementById('rgi');
-        rgiResultado.innerHTML = `RGI (0,75%): ${formatarMoeda(valorRGI)}`;
+        rgiResultado.textContent = `RGI (0,75%): ${formatarMoeda(valorRGI)}`;
     }
-
-    // ------------------------------------------------------------
-
-    valor_aquisicao.addEventListener('input', (e) => {
-        let valor = e.target.value.replace(/\D/g, '');
-        let valorNumerico = Number(valor) / 100;
-
-        e.target.value = formatarMoeda(valorNumerico);
-
-        let valorITBI = valorNumerico * ibti;
-        itbiResultado.textContent = `Resultado ITBI: ${formatarMoeda(valorITBI)}`;
-
-
-        const preco_bruto_terreno = document.getElementById('preco_bruto_terreno');
-        preco_bruto_terreno.innerHTML = `Valor Bruto do Terreno: ${formatarMoeda(valorNumerico)}`;
-
-        calcularResultadoOperacional();
-    });
-
-
-    // ------------------------------------------------------------
 
     function calcularCertidao() {
-
-        let valorITBI_ = obterValorITBI();
-        let custo_registro = valorITBI_ * 0.13
-
-
-        const registroResultado = document.getElementById('certidao_etc');
-        registroResultado.innerHTML = `RGI (13%): ${formatarMoeda(custo_registro)}`;
+        const valorITBI_ = obterValorITBI();
+        const custo_registro = valorITBI_ * 0.13;
+        registroResultado.textContent = `Certidão (13% ITBI): ${formatarMoeda(custo_registro)}`;
     }
-
-    // ------------------------------------------------------------
 
     function calcularCustoTotalTerreno() {
         const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
-        const itbi = valorTerreno * 0.02;
-        const rgi = (valorTerreno + obterCustoTotalObra()) * 0.0075;
-        const certidoes = itbi * 0.13;
-
-        const totalTerreno = itbi + rgi + certidoes;
-
-        const custoTotalTerrenoEl = document.getElementById('custo_total_terreno');
+        const itbiValor = valorTerreno * ibti;
+        const rgiValor = (valorTerreno + obterCustoTotalObra()) * rgi;
+        const certidoes = itbiValor * 0.13;
+        const totalTerreno = itbiValor + rgiValor + certidoes;
         custoTotalTerrenoEl.textContent = `Total do Terreno: ${formatarMoeda(totalTerreno)}`;
-
         return totalTerreno;
-
     }
-
-
-
-    // ----------------------------------------------------------------------------
-
-    // CUSTOS RELAIONADOS A OBRA
-
-    const qtdUnidades = document.getElementById('qtd_unidades');
-    const metragem = document.getElementById('metragem_da_obra');
-    const custoMetro = document.getElementById('custo_por_metro');
-    const resultado = document.getElementById('custo_total_obra');
-
-    // ------------------------------------------------------------
-
-    function formatarMoeda(valor) {
-        return valor.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        });
-    }
-
-    // ------------------------------------------------------------
-
-    function limparValorMoeda(valor) {
-
-        return Number(valor.replace(/\D/g, '')) / 100;
-    }
-
-    // ------------------------------------------------------------
-
-    custoMetro.addEventListener('change', (e) => {
-        let valor = e.target.value.replace(/\D/g, '');
-        let valorNumerico = Number(valor) / 100;
-        e.target.value = formatarMoeda(valorNumerico);
-        calcularCustoObra();
-    });
-
-    // ------------------------------------------------------------
-
-    qtdUnidades.addEventListener('change', calcularCustoObra);
-    metragem.addEventListener('change', calcularCustoObra);
-
-    // --------------------------------------------------------------
 
     function calcularCustoObra() {
         const unidades = parseFloat(qtdUnidades.value) || 0;
         const area = parseFloat(metragem.value) || 0;
         const custo = limparValorMoeda(custoMetro.value) || 0;
 
-        const percentual_construtor = 0.1;
-        const lucro_construtor = document.getElementById('lucro_construtor');
-        const custo_obra_bruto_element = document.getElementById('custo_obra_bruto');
-
         const custoConstrucao = unidades * area * custo;
         const resultado_construtor = custoConstrucao * percentual_construtor;
 
-        lucro_construtor.innerHTML = `Lucro do Construtor 10%: ${formatarMoeda(resultado_construtor)} `;
-
+        lucro_construtor.textContent = `Lucro do Construtor 10%: ${formatarMoeda(resultado_construtor)}`;
         resultado.textContent = `Total: ${formatarMoeda(custoConstrucao)}`;
 
         const condominio = limparValorMoeda(condominioInput.value) || 0;
@@ -155,51 +109,107 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const custoBrutoObra = custoConstrucao + condominio + agua + custododinheiro;
 
-        custo_obra_bruto_element.textContent = formatarMoeda(custoBrutoObra);
+        custo_obra_bruto_element.textContent = `Custo Da Obra: ${formatarMoeda(custoBrutoObra)}`;
 
         calcularResultadoOperacional();
     }
 
     function CustoObraValores() {
-        const condominioInput = limparValorMoeda(document.getElementById('valor_condominio').value) || 0;
-        const aguaInput = limparValorMoeda(document.getElementById('valor_agua_energia').value) || 0;
-        const custo_iptu = limparValorMoeda(document.getElementById('valor_iptu').value) || 0;
+        const condominio = limparValorMoeda(condominioInput.value) || 0;
+        const agua = limparValorMoeda(aguaInput.value) || 0;
+        const custo_iptu_val = limparValorMoeda(custo_iptu.value) || 0;
 
-        const custoBrutoObra = condominioInput + aguaInput + custo_iptu;
-
-        return custoBrutoObra;
+        return condominio + agua + custo_iptu_val;
     }
 
+    function calcularTotal() {
+        const condominio = limparValorMoeda(condominioInput.value) || 0;
+        const agua = limparValorMoeda(aguaInput.value) || 0;
+        const custododinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
+        const iptu = limparValorMoeda(custo_iptu.value) || 0;
 
-    // ----------------------------------------------------------------------------
+        const totalFinanciamento = condominio + agua + custododinheiro + iptu;
 
-    //    Custo Obra e Financiamento
+        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
+        const custoObra = obterCustoTotalObra();
+        const somaTotal = valorTerreno + custoObra;
+        const valorHabiteSe = somaTotal * habite_se_porcentagem;
 
-    const condominioInput = document.getElementById('valor_condominio');
-    const aguaInput = document.getElementById('valor_agua_energia');
-    const custo_do_dinheiro = document.getElementById('custo_dinheiro');
-    const custo_iptu = document.getElementById('valor_iptu');
+        habite_se.textContent = `Habite-se (4%): ${formatarMoeda(valorHabiteSe)}`;
+        resultadoFinanciamento.textContent = formatarMoeda(totalFinanciamento);
+        custo_obra_financiamento.textContent = resultadoFinanciamento.textContent;
 
-
-    const resultadoFinanciamento = document.getElementById('resultado_financiamento');
-
-
-    // ------------------------------------------------------------
-
-    function formatarMoeda(valor) {
-        return valor.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        });
+        calcularRGI();
+        calcularCertidao();
+        calcularCustoTotalTerreno();
+        calcularResultadoOperacional();
+        calcularSomaDosCards();
+        calcularTotalGeral();
+        CalcularCorretagem();
+        calcularLucroBruto();
     }
 
-    // ------------------------------------------------------------
+    function calcularResultadoOperacional() {
+        const terreno = limparValorMoeda(valor_aquisicao.value) || 0;
+        const financiamento = limparValorTexto(resultadoFinanciamento.textContent) || 0;
+        const obraBruta = limparValorTexto(custo_obra_bruto_element.textContent) || 0;
 
-    function limparValorMoeda(valor) {
-        return Number(valor.replace(/\D/g, '')) / 100;
+        const total = terreno + financiamento + obraBruta;
+        resultado_operacional.textContent = formatarMoeda(total);
     }
 
-    // ------------------------------------------------------------
+    function calcularSomaDosCards() {
+        const custoTerrenoValor = calcularCustoTotalTerreno();
+        const obraFinanciamentoTexto = CustoObraValores();
+
+        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
+        const custoObra = obterCustoTotalObra();
+        const somaTotal = valorTerreno + custoObra;
+        const valorHabiteSe = somaTotal * habite_se_porcentagem;
+
+        const totalFinal = custoTerrenoValor + valorHabiteSe + obraFinanciamentoTexto;
+
+        total_total.textContent = `Custo Operacional: ${formatarMoeda(totalFinal)}`;
+        custo_obra_financiamento.textContent = total_total.textContent;
+    }
+
+    function calcularTotalGeral() {
+        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
+        const custoObra = limparValorTexto(custo_obra_bruto_element.textContent) || 0;
+        const custoOperacional = limparValorTexto(total_total.textContent) || 0;
+
+        const totalFinal = valorTerreno + custoObra + custoOperacional;
+
+        resultado_operacional.textContent = `Total Operacional: ${formatarMoeda(totalFinal)}`;
+
+        document.getElementById('valor_quitacao').textContent = formatarMoeda(totalFinal);
+
+    }
+
+    function CalcularCorretagem() {
+        const vgv = limparValorMoeda(vgvInput.value) || 0;
+        const corretor_valor = vgv * porcentagem_corretor;
+        corretor.textContent = formatarMoeda(corretor_valor);
+
+        const propaganda_valor = vgv * porcentagem_propaganda;
+        propaganda.innerHTML = formatarMoeda(propaganda_valor);
+
+        document.getElementById('resultado_corretagem').textContent = formatarMoeda(corretor_valor);
+
+    }
+
+    function calcularLucroBruto() {
+        const quitacao = limparValorMoeda(document.getElementById('valor_quitacao').textContent);
+        const corretagem = limparValorMoeda(document.getElementById('resultado_corretagem').textContent);
+
+        const imposto = quitacao * 0.15;
+
+        document.getElementById('imposto_de_renda').textContent = formatarMoeda(imposto);
+
+        const lucro = quitacao - imposto - corretagem;
+
+        document.getElementById('lucro_bruto').textContent = `Lucro Bruto: ${formatarMoeda(lucro)}`;
+    }
 
     function aplicarMascaraMoeda(input) {
         input.addEventListener('input', (e) => {
@@ -210,146 +220,64 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --------------------------------------------------------------------------
-
-    // CUSTO TOTAL DA OBRA
-
-    function calcularTotal() {
-        const condominio = limparValorMoeda(condominioInput.value) || 0;
-        const agua = limparValorMoeda(aguaInput.value) || 0;
-        const custododinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
-        const iptu = limparValorMoeda(custo_iptu.value) || 0;
-
-        const total = condominio + agua + custododinheiro + iptu;
-
-        const habite_se_porcentagem = 0.04;
-        const habite_se = document.getElementById('habite_se');
-
-        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
-        const custoObra = obterCustoTotalObra();
-
-        const somaTotal = valorTerreno + custoObra;
-        const valorHabiteSe = somaTotal * habite_se_porcentagem;
-
-        habite_se.innerHTML = `Habite-se (4%): ${formatarMoeda(valorHabiteSe)}`;
-
-        resultadoFinanciamento.textContent = formatarMoeda(total);
-
-        document.getElementById('custo_obra_financiamento').innerHTML = `Custo Obra e Financiamento: ${resultadoFinanciamento.textContent}`;
-
-
-        calcularRGI();
-        calcularCertidao();
-        calcularCustoTotalTerreno();
-        calcularResultadoOperacional();
-        calcularSomaDosCards();
-        CustoObraValores();
-    }
-
-    // -------------------------------------------------------------------------------
-
-    function obterCustoTotalObra() {
-        const unidades = parseFloat(qtdUnidades.value) || 0;
-        const area = parseFloat(metragem.value) || 0;
-        const custo = limparValorMoeda(custoMetro.value) || 0;
-        return unidades * area * custo;
-    }
-
-    // ------------------------------------------------------------
-
-    function obterValorITBI() {
-        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
-        return valorTerreno * ibti;
-    }
-
-    // ------------------------------------------------------------
-
-    function calcularRGI() {
-        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
-        const custoObra = obterCustoTotalObra();
-
-        const baseCalculo = valorTerreno + custoObra;
-        const valorRGI = baseCalculo * rgi;
-
-        const rgiResultado = document.getElementById('rgi');
-        rgiResultado.innerHTML = `RGI (0,75%): ${formatarMoeda(valorRGI)}`;
-    }
-
-    // ------------------------------------------------------------
-
     aplicarMascaraMoeda(condominioInput);
     aplicarMascaraMoeda(aguaInput);
     aplicarMascaraMoeda(custo_do_dinheiro);
-    aplicarMascaraMoeda(custo_iptu)
+    aplicarMascaraMoeda(custo_iptu);
+    aplicarMascaraMoeda(vgvInput);
 
 
-    // ----------------------------------------------------------------------------
 
-    // Calculo do Resultado Operacional
+    valor_aquisicao.addEventListener('input', (e) => {
+        let valor = e.target.value.replace(/\D/g, '');
+        let valorNumerico = Number(valor) / 100;
+        e.target.value = formatarMoeda(valorNumerico);
 
-    valor_aquisicao.addEventListener('change', calcularResultadoOperacional);
+        let valorITBI = valorNumerico * ibti;
+        itbiResultado.textContent = `Resultado ITBI: ${formatarMoeda(valorITBI)}`;
+
+        preco_bruto_terreno.textContent = `Valor Bruto do Terreno: ${formatarMoeda(valorNumerico)}`;
+
+        calcularResultadoOperacional();
+        calcularTotal();
+    });
+
+    custoMetro.addEventListener('change', (e) => {
+        let valor = e.target.value.replace(/\D/g, '');
+        let valorNumerico = Number(valor) / 100;
+        e.target.value = formatarMoeda(valorNumerico);
+        calcularCustoObra();
+        calcularTotal();
+    });
+
+    qtdUnidades.addEventListener('change', () => {
+        calcularCustoObra();
+        calcularTotal();
+    });
+    metragem.addEventListener('change', () => {
+        calcularCustoObra();
+        calcularTotal();
+    });
+
+    vgvInput.addEventListener('input', () => {
+        CalcularCorretagem();
+    });
+
+    // Atualiza resultado operacional quando esses valores mudarem
     condominioInput.addEventListener('change', calcularResultadoOperacional);
     aguaInput.addEventListener('change', calcularResultadoOperacional);
+    custo_do_dinheiro.addEventListener('change', calcularResultadoOperacional);
 
-    document.getElementById('custo_obra_bruto').addEventListener('DOMSubtreeModified', calcularResultadoOperacional);
+    // Também recalcula resultado operacional quando o custo bruto da obra mudar
+    custo_obra_bruto_element.addEventListener('DOMSubtreeModified', calcularResultadoOperacional);
 
-    let preco_bruto_terreno = document.getElementById('preco_bruto_terreno');
-    preco_bruto_terreno.innerHTML = `Valor Bruto do Terreno: ${valor_aquisicao.value}`;
+    // Inicializa valores exibidos com os valores atuais
+    preco_bruto_terreno.textContent = `Valor Bruto do Terreno: ${valor_aquisicao.value}`;
+    custo_obra_financiamento.textContent = `Custo Obra e Financiamento: ${resultadoFinanciamento.textContent}`;
 
-    let custo_obra_financiamento = document.getElementById('custo_obra_financiamento');
-    custo_obra_financiamento.innerHTML = `Custo Obra e Financiamento: ${resultadoFinanciamento.textContent}`;
-
-
-    // ------------------------------------------------------------
-
-
-    function limparValorTexto(texto) {
-        return Number(texto.replace(/\D/g, '')) / 100;
-    }
-
-
-    function calcularResultadoOperacional() {
-
-        const terreno = limparValorMoeda(valor_aquisicao.value) || 0;
-
-
-        const financiamento = limparValorTexto(resultadoFinanciamento.textContent) || 0;
-
-
-        const obraBruta = limparValorTexto(document.getElementById('custo_obra_bruto').textContent) || 0;
-
-        const total = terreno + financiamento + obraBruta;
-
-        document.getElementById('resultado_operacional').textContent = formatarMoeda(total);
-    }
-
-
-    calcularResultadoOperacional();
-
-    // -------------------------------------------------------------
-
-
-    function calcularSomaDosCards() {
-        const custoTerrenoValor = calcularCustoTotalTerreno();
-
-        const obraFinanciamentoTexto = CustoObraValores();
-
-        const habite_se_porcentagem = 0.04;
-        const habite_se = document.getElementById('habite_se');
-
-        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
-        const custoObra = obterCustoTotalObra();
-
-        const somaTotal = valorTerreno + custoObra;
-        const valorHabiteSe = somaTotal * habite_se_porcentagem;
-
-
-
-        const totalFinal = custoTerrenoValor + valorHabiteSe + obraFinanciamentoTexto;
-
-        const resultadoFinalEl = document.getElementById('total_total');
-        resultadoFinalEl.textContent = `TOTAL GERAL: ${formatarMoeda(totalFinal)}`;
-    }
-
+    // Chamada inicial para garantir que tudo esteja calculado na carga da página
+    calcularCustoObra();
+    calcularTotal();
+    CalcularCorretagem();
 
 });

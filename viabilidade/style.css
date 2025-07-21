@@ -118,6 +118,10 @@ screen and (orientation: portrait) {
             padding: 2vw;
         }
 
+        h3{
+            font-size: 3vw;
+        }
+
         label {
             font-size: var(--font-size);
             text-align: center;
