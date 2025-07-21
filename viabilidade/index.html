@@ -23,153 +23,160 @@
 
     <h1 id="title">CÁLCULO DE VIABILIDADE</h1>
 
-    <form id="loginForm" class="form">
+    <div id="pdf_content">
 
 
-        <div class="card">
+        <form id="loginForm" class="form">
 
-            <h2>Custos do Terreno:</h2>
 
-            <label for="valor_aquisicao">Valor de Aquisição</label>
-            <input type="text" id="valor_aquisicao" placeholder="R$ 0,00">
+            <div class="card">
 
-            <label>ITBI 2%</label>
-            <h3 id="itbi_resultado">Resultado ITBI:</h3>
+                <h2>Custos do Terreno:</h2>
 
-            <label>REGISTRO (RGI) 0,75%</label>
-            <h3 id="rgi">Resultado RGI: </h3>
+                <label for="valor_aquisicao">Valor de Aquisição</label>
+                <input type="text" id="valor_aquisicao" placeholder="R$ 0,00">
 
-            <label>Certidões, Cópias e autentificações</label>
-            <h3 id="certidao_etc">Resultado: </h3>
+                <label>ITBI 2%</label>
+                <h3 id="itbi_resultado">Resultado ITBI:</h3>
 
-            <h2 id="custo_total_terreno">Total: R$ 0,00</h2>
+                <label>REGISTRO (RGI) 0,75%</label>
+                <h3 id="rgi">Resultado RGI: </h3>
 
+                <label>Certidões, Cópias e autentificações</label>
+                <h3 id="certidao_etc">Resultado: </h3>
 
-        </div>
+                <h2 id="custo_total_terreno">Total: R$ 0,00</h2>
 
 
-        <!-- ---------------------------------------------->
+            </div>
 
-        <div class="card">
 
+            <!-- ---------------------------------------------->
 
-            <h2>Custos Relacionados a Obra:</h2>
+            <div class="card">
 
-            <label for="qtd_unidades">Quantidade de Unidades</label>
-            <input type="number" id="qtd_unidades" min="1" value="1">
 
-            <label for="metragem_da_obra">Área de cada unidade (m²)</label>
-            <input type="number" id="metragem_da_obra" min="0" step="0.01">
+                <h2>Custos Relacionados a Obra:</h2>
 
-            <label for="custo_por_metro">Custo (por metro quadrado)</label>
-            <input type="text" id="custo_por_metro" placeholder="R$ 0,00">
+                <label for="qtd_unidades">Quantidade de Unidades</label>
+                <input type="number" id="qtd_unidades" min="1" value="1">
 
-            <h3 id="lucro_construtor">Lucro do Construtor 10%: </h3>
+                <label for="metragem_da_obra">Área de cada unidade (m²)</label>
+                <input type="number" id="metragem_da_obra" min="0" step="0.01">
 
+                <label for="custo_por_metro">Custo (por metro quadrado)</label>
+                <input type="text" id="custo_por_metro" placeholder="R$ 0,00">
 
-            <h2 id="custo_total_obra">R$ 0,00</h2>
+                <h3 id="lucro_construtor">Lucro do Construtor 10%: </h3>
 
 
-        </div>
+                <h2 id="custo_total_obra">R$ 0,00</h2>
 
-        <!-- ---------------------------------------------->
 
-        <div class="card">
+            </div>
 
+            <!-- ---------------------------------------------->
 
-            <h2>Custo Operacional da Obra</h2>
+            <div class="card">
 
-            <label for="valor_condominio">Condomínio</label>
-            <input type="text" id="valor_condominio" placeholder="R$ 0,00">
 
-            <label for="valor_agua_energia">Luz e água</label>
-            <input type="text" id="valor_agua_energia" placeholder="R$ 0,00">
+                <h2>Custo Operacional da Obra</h2>
 
-            <label for="valor_iptu">IPTU</label>
-            <input type="text" id="valor_iptu" placeholder="R$ 0,00">
+                <label for="valor_condominio">Condomínio</label>
+                <input type="text" id="valor_condominio" placeholder="R$ 0,00">
 
+                <label for="valor_agua_energia">Luz e água</label>
+                <input type="text" id="valor_agua_energia" placeholder="R$ 0,00">
 
+                <label for="valor_iptu">IPTU</label>
+                <input type="text" id="valor_iptu" placeholder="R$ 0,00">
 
 
-            <h3 id="habite_se">HABITE-SE + Averbação + ISS + INSS (despachante): R$0,00</h3>
 
-            <h3 id="resultado_financiamento"></h3>
 
-            <h2 id="total_total"></h2>
+                <h3 id="habite_se">HABITE-SE + Averbação + ISS + INSS (despachante): R$0,00</h3>
 
+                <h3 id="resultado_financiamento"></h3>
 
+                <h2 id="total_total"></h2>
 
-        </div>
 
-        <div class="card">
 
-            <h2>Custo do Dinheiro</h2>
+            </div>
 
-            <label for="">Custo do Dinheiro</label>
-            <input type="text" id="custo_dinheiro" placeholder="R$ 0,00">
+            <div class="card">
 
-        </div>
+                <h2>Custo do Dinheiro</h2>
 
-        <!-- ---------------------------------------------->
+                <label for="">Custo do Dinheiro</label>
+                <input type="text" id="custo_dinheiro" placeholder="R$ 0,00">
 
-        <div class="card">
+            </div>
 
-            <h2>VGV (Valor Geral de Venda)</h2>
+            <!-- ---------------------------------------------->
 
-            <label for="vgv">VGV Do Harvey</label>
-            <input type="text" id="vgv">
+            <div class="card">
 
-        </div>
+                <h2>VGV (Valor Geral de Venda)</h2>
 
+                <label for="vgv">VGV Do Harvey</label>
+                <input type="text" id="vgv">
 
-        <div class="card">
+            </div>
 
-            <h2>Corretagem</h2>
 
-            <label>Corretor 10%: </label>
-            <h3 id="corretor">R$ 0,00</h3>
+            <div class="card">
 
-            <label>Propaganda Própria 1%: </label>
-            <h3 id="propaganda">R$ 0,00</h3>
+                <h2>Corretagem</h2>
 
-        </div>
+                <label>Corretor 10%: </label>
+                <h3 id="corretor">R$ 0,00</h3>
 
-        <div class="card">
+                <label>Propaganda Própria 1%: </label>
+                <h3 id="propaganda">R$ 0,00</h3>
 
-            <h2>TOTAL OPERACIONAL</h2>
+            </div>
 
-            <label id="preco_bruto_terreno">Custo Bruto do Terreno: </label>
-            <label id="custo_obra_financiamento"></label>
-            <label id="custo_obra_bruto">Custo Relacionados a Obra:</label><br>
+            <div class="card">
 
-            <h2 id="resultado_operacional">R$ 0,00</h2>
+                <h2>TOTAL OPERACIONAL</h2>
 
-        </div>
+                <label id="preco_bruto_terreno">Custo Bruto do Terreno: </label>
+                <label id="custo_obra_financiamento"></label>
+                <label id="custo_obra_bruto">Custo Relacionados a Obra:</label><br>
 
-        <!-- ------------------------------------------------------------------>
+                <h2 id="resultado_operacional">R$ 0,00</h2>
 
-        <div class="card">
+            </div>
 
-            <h2>VALOR FINAL A RECEBER</h2>
+            <!-- ------------------------------------------------------------------>
 
-            <label>Total quitação:</label>
-            <h3 id="valor_quitacao"></h3>
+            <div class="card">
 
-            <label >Imposto de Renda:</label>
-            <h3 id="imposto_de_renda"></h3>
+                <h2>VALOR FINAL A RECEBER</h2>
 
-            <label>Corretagem:</label>
-            <h3 id="resultado_corretagem"></h3>
+                <label>Total quitação:</label>
+                <h3 id="valor_quitacao"></h3>
 
-            <h2 id="lucro_bruto">Lucro Bruto: R$ 0,00</h2>
+                <label>Imposto de Renda:</label>
+                <h3 id="imposto_de_renda"></h3>
 
+                <label>Corretagem:</label>
+                <h3 id="resultado_corretagem"></h3>
 
-        </div>
+                <h2 id="lucro_bruto">Lucro Bruto: R$ 0,00</h2>
 
 
-        <button type="button" id="btn_enviar">Salvar</button>
+            </div>
 
-    </form>
+
+            <button type="button" id="btn_enviar">Salvar</button>
+
+        </form>
+
+
+    </div>
+
 
 
 </body>
