@@ -35,6 +35,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2vw;
+
 }
 
 .card {
@@ -56,7 +57,7 @@ body {
         border-radius: 0.2vw;
     }
 
-    h3{
+    h3 {
         text-align: center;
     }
 
@@ -84,7 +85,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* --------------------------------------------------------- */
 
-@media screen and (max-width: 968px), screen and (orientation: portrait) { 
+@media screen and (max-width: 968px),
+screen and (orientation: portrait) {
 
     #title {
         font-size: 6vw;
@@ -116,7 +118,7 @@ input[type="number"]::-webkit-outer-spin-button {
             padding: 2vw;
         }
 
-        label{
+        label {
             font-size: var(--font-size);
             text-align: center;
         }
