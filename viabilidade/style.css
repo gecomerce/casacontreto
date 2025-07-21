@@ -108,7 +108,7 @@ screen and (orientation: portrait) {
     }
 
     #pdf-content {
-        width: 100vw;
+        width: 100%;
         padding: 0;
     }
 
