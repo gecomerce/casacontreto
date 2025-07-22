@@ -81,6 +81,7 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 0.5vw;
     cursor: pointer;
     margin-bottom: 10vh;
+    width: 47%;
 }
 
 #pdf_content {
@@ -148,11 +149,11 @@ screen and (orientation: portrait) {
     }
 
     #btn_enviar {
-        width: 90vw;
+        width: 95%;
         font-size: 6vw;
         border-radius: 2vw;
         padding: 2vw;
-        margin-bottom: 5vh;
+        margin-bottom: 20vh;
     }
 
 }
