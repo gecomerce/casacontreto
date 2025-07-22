@@ -83,7 +83,7 @@ input[type="number"]::-webkit-outer-spin-button {
     /* margin-bottom: 10vh; */
 }
 
-#pdf-content {
+#pdf_ontent {
     width: 210mm;
     min-height: 297mm;
     padding: 20px;
@@ -107,8 +107,8 @@ screen and (orientation: portrait) {
         margin-bottom: 8vw;
     }
 
-    #pdf-content {
-        width: 100%;
+    #pdf_content {
+        width: 90%;
         padding: 0;
     }
 
