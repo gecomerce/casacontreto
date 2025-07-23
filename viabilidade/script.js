@@ -1,5 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
 
+
+document.addEventListener('DOMContentLoaded', () => {
     const valor_aquisicao = document.getElementById('valor_aquisicao');
     const itbiResultado = document.getElementById('itbi_resultado');
     const qtdUnidades = document.getElementById('qtd_unidades');
@@ -22,11 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultado_operacional = document.getElementById('resultado_operacional');
     const total_total = document.getElementById('total_total');
     const vgvInput = document.getElementById('vgv');
-
     const corretor = document.getElementById('corretor');
-
     const propaganda = document.getElementById('propaganda');
-
 
     const ibti = 0.02;
     const rgi = 0.0075;
@@ -34,8 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const porcentagem_corretor = 0.1;
     const porcentagem_propaganda = 0.01;
     const habite_se_porcentagem = 0.04;
-
-    // ----------------------------------------------------
+    const percentualIPTU = 0.007;
 
     function formatarMoeda(valor) {
         return valor.toLocaleString('pt-BR', {
@@ -54,7 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return Number(texto.replace(/\D/g, '')) / 100;
     }
 
-    // -----------------------------------------------
+    function calcularIPTU() {
+        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
+        const valorIPTU = valorTerreno * percentualIPTU;
+        custo_iptu.value = formatarMoeda(valorIPTU);
+    }
 
     function obterValorITBI() {
         const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
@@ -118,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const condominio = limparValorMoeda(condominioInput.value) || 0;
         const agua = limparValorMoeda(aguaInput.value) || 0;
         const custo_iptu_val = limparValorMoeda(custo_iptu.value) || 0;
-
         return condominio + agua + custo_iptu_val;
     }
 
@@ -181,35 +181,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalFinal = valorTerreno + custoObra + custoOperacional;
 
         resultado_operacional.textContent = `Total Operacional: ${formatarMoeda(totalFinal)}`;
-
         document.getElementById('valor_quitacao').textContent = formatarMoeda(totalFinal);
-
     }
+
 
     function CalcularCorretagem() {
         const vgv = limparValorMoeda(vgvInput.value) || 0;
         const corretor_valor = vgv * porcentagem_corretor;
-        corretor.textContent = formatarMoeda(corretor_valor);
-
         const propaganda_valor = vgv * porcentagem_propaganda;
-        propaganda.innerHTML = formatarMoeda(propaganda_valor);
+        const total = corretor_valor + propaganda_valor;
 
-        document.getElementById('resultado_corretagem').textContent = formatarMoeda(corretor_valor);
+        corretor.textContent = formatarMoeda(corretor_valor);
+        propaganda.textContent = formatarMoeda(propaganda_valor);
 
+        const totalCorretagemEl = document.getElementById('total_corretagem');
+        totalCorretagemEl.textContent = `Total Corretagem: ${formatarMoeda(total)}`;
+
+
+        document.getElementById('resultado_corretagem').textContent = totalCorretagemEl.textContent;
     }
+
+
 
     function calcularLucroBruto() {
         const quitacao = limparValorMoeda(document.getElementById('valor_quitacao').textContent);
         const corretagem = limparValorMoeda(document.getElementById('resultado_corretagem').textContent);
-
+        const vgv = limparValorMoeda(vgvInput.value) || 0;
         const imposto = quitacao * 0.15;
-
         document.getElementById('imposto_de_renda').textContent = formatarMoeda(imposto);
-
-        const lucro = quitacao - imposto - corretagem;
-
+        const lucro = vgv - quitacao - imposto - corretagem;
         document.getElementById('lucro_bruto').textContent = `Lucro Bruto: ${formatarMoeda(lucro)}`;
     }
+
 
     function aplicarMascaraMoeda(input) {
         input.addEventListener('input', (e) => {
@@ -223,10 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
     aplicarMascaraMoeda(condominioInput);
     aplicarMascaraMoeda(aguaInput);
     aplicarMascaraMoeda(custo_do_dinheiro);
-    aplicarMascaraMoeda(custo_iptu);
-    aplicarMascaraMoeda(vgvInput);
-
-
+    aplicarMascaraMoeda(vgvInput); // <<-- custo_iptu não entra aqui mais
 
     valor_aquisicao.addEventListener('input', (e) => {
         let valor = e.target.value.replace(/\D/g, '');
@@ -238,14 +238,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         preco_bruto_terreno.textContent = `Valor Bruto do Terreno: ${formatarMoeda(valorNumerico)}`;
 
+        calcularIPTU();
         calcularResultadoOperacional();
         calcularTotal();
     });
 
-    custoMetro.addEventListener('change', (e) => {
-        let valor = e.target.value.replace(/\D/g, '');
-        let valorNumerico = Number(valor) / 100;
-        e.target.value = formatarMoeda(valorNumerico);
+    custoMetro.addEventListener('change', () => {
         calcularCustoObra();
         calcularTotal();
     });
@@ -254,6 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         calcularCustoObra();
         calcularTotal();
     });
+
     metragem.addEventListener('change', () => {
         calcularCustoObra();
         calcularTotal();
@@ -263,21 +262,16 @@ document.addEventListener('DOMContentLoaded', () => {
         CalcularCorretagem();
     });
 
-    // Atualiza resultado operacional quando esses valores mudarem
     condominioInput.addEventListener('change', calcularResultadoOperacional);
     aguaInput.addEventListener('change', calcularResultadoOperacional);
     custo_do_dinheiro.addEventListener('change', calcularResultadoOperacional);
-
-    // Também recalcula resultado operacional quando o custo bruto da obra mudar
     custo_obra_bruto_element.addEventListener('DOMSubtreeModified', calcularResultadoOperacional);
 
-    // Inicializa valores exibidos com os valores atuais
     preco_bruto_terreno.textContent = `Valor Bruto do Terreno: ${valor_aquisicao.value}`;
     custo_obra_financiamento.textContent = `Custo Obra e Financiamento: ${resultadoFinanciamento.textContent}`;
 
-    // Chamada inicial para garantir que tudo esteja calculado na carga da página
+    calcularIPTU(); // chamada inicial também
     calcularCustoObra();
     calcularTotal();
     CalcularCorretagem();
-
 });
