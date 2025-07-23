@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const custo_obra_bruto_element = document.getElementById('custo_obra_bruto');
     const condominioInput = document.getElementById('valor_condominio');
     const aguaInput = document.getElementById('valor_agua_energia');
-    const custo_do_dinheiro = document.getElementById('custo_dinheiro');
+    // const custo_do_dinheiro = document.getElementById('custo_dinheiro');
     const custo_iptu = document.getElementById('valor_iptu');
     const resultadoFinanciamento = document.getElementById('resultado_financiamento');
     const preco_bruto_terreno = document.getElementById('preco_bruto_terreno');
@@ -106,9 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const condominio = limparValorMoeda(condominioInput.value) || 0;
         const agua = limparValorMoeda(aguaInput.value) || 0;
-        const custododinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
+        // const custododinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
 
-        const custoBrutoObra = custoConstrucao + condominio + agua + custododinheiro;
+        // const custoBrutoObra = custoConstrucao + condominio + agua + custododinheiro;
+        const custoBrutoObra = custoConstrucao + condominio + agua;
+
 
         custo_obra_bruto_element.textContent = `Custo Da Obra: ${formatarMoeda(custoBrutoObra)}`;
 
@@ -125,10 +127,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function calcularTotal() {
         const condominio = limparValorMoeda(condominioInput.value) || 0;
         const agua = limparValorMoeda(aguaInput.value) || 0;
-        const custododinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
+        // const custododinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
         const iptu = limparValorMoeda(custo_iptu.value) || 0;
 
-        const totalFinanciamento = condominio + agua + custododinheiro + iptu;
+        // const totalFinanciamento = condominio + agua + custododinheiro + iptu;
+        const totalFinanciamento = condominio + agua + iptu;
+
 
         const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
         const custoObra = obterCustoTotalObra();
@@ -225,8 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     aplicarMascaraMoeda(condominioInput);
     aplicarMascaraMoeda(aguaInput);
-    aplicarMascaraMoeda(custo_do_dinheiro);
-    aplicarMascaraMoeda(vgvInput); // <<-- custo_iptu não entra aqui mais
+    // aplicarMascaraMoeda(custo_do_dinheiro);
+    aplicarMascaraMoeda(vgvInput); 
 
     valor_aquisicao.addEventListener('input', (e) => {
         let valor = e.target.value.replace(/\D/g, '');
@@ -264,13 +268,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     condominioInput.addEventListener('change', calcularResultadoOperacional);
     aguaInput.addEventListener('change', calcularResultadoOperacional);
-    custo_do_dinheiro.addEventListener('change', calcularResultadoOperacional);
+    // custo_do_dinheiro.addEventListener('change', calcularResultadoOperacional);
     custo_obra_bruto_element.addEventListener('DOMSubtreeModified', calcularResultadoOperacional);
 
     preco_bruto_terreno.textContent = `Valor Bruto do Terreno: ${valor_aquisicao.value}`;
     custo_obra_financiamento.textContent = `Custo Obra e Financiamento: ${resultadoFinanciamento.textContent}`;
 
-    calcularIPTU(); // chamada inicial também
+    calcularIPTU();
     calcularCustoObra();
     calcularTotal();
     CalcularCorretagem();
