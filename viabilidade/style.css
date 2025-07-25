@@ -6,6 +6,11 @@
     --container-color: rgb(0, 168, 180);
     --color-text: #0b063f;
     --font-size: 4vw;
+
+    /* -------------------------------- */
+
+    --label-size-mobile: 4vw;
+    --font-size-h3: 5vw;
 }
 
 
@@ -121,7 +126,7 @@ screen and (orientation: portrait) {
         gap: 7vw;
 
         h2 {
-            font-size: 5vw;
+            font-size: var(--font-size-h3);
             text-align: center;
         }
     }
@@ -143,7 +148,7 @@ screen and (orientation: portrait) {
         }
 
         label {
-            font-size: var(--font-size);
+            font-size: var(--label-size-mobile);
             text-align: center;
         }
     }
