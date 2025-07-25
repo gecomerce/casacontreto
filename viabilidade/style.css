@@ -85,7 +85,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 #pdf_content {
-    width: 210mm;
+    width: 95%;
     min-height: 297mm;
     padding: 2;
     background-color: white;
