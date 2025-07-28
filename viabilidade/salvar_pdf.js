@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     btnPDF.addEventListener("click", function () {
         const elementoParaPDF = document.getElementById("pdf_content");
 
+        const larguraOriginal = elementoParaPDF.style.width;
+        elementoParaPDF.style.width = '95%';
+
         const opcoes = {
             margin: 10,
             filename: 'calculo_viabilidade.pdf',
@@ -20,6 +23,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         };
 
-        html2pdf().set(opcoes).from(elementoParaPDF).save();
+        html2pdf().set(opcoes).from(elementoParaPDF).save().then(() => {
+            elementoParaPDF.style.width = larguraOriginal;
+        });
     });
+
+
 });

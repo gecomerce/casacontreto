@@ -212,7 +212,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const quitacao = limparValorMoeda(document.getElementById('valor_quitacao').textContent);
         const corretagem = limparValorMoeda(document.getElementById('resultado_corretagem').textContent);
         const vgv = limparValorMoeda(vgvInput.value) || 0;
-        const imposto = quitacao * 0.15;
+        // const imposto = quitacao * 0.15;
+        const imposto = (vgv - quitacao) * 0.15;
+
         document.getElementById('imposto_de_renda').textContent = formatarMoeda(imposto);
         const lucro = vgv - quitacao - imposto - corretagem;
         document.getElementById('lucro_bruto').textContent = `Lucro Bruto: ${formatarMoeda(lucro)}`;
