@@ -150,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         calcularSomaDosCards();
         calcularTotalGeral();
         CalcularCorretagem();
+        calcularLucroPadeiro();
         calcularLucroBruto();
     }
 
@@ -217,6 +218,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('lucro_bruto').textContent = `Lucro Bruto: ${formatarMoeda(lucro)}`;
     }
 
+    function calcularLucroPadeiro() {
+        const quitacao = limparValorMoeda(document.getElementById('valor_quitacao').textContent);
+        const vgv = limparValorMoeda(vgvInput.value) || 0;
+
+        const lucroPadeiro = vgv - quitacao;
+
+        document.getElementById('lucro_padeiro').textContent = `Lucro do Padeiro: ${formatarMoeda(lucroPadeiro)}`;
+    }
+
+
 
     function aplicarMascaraMoeda(input) {
         input.addEventListener('input', (e) => {
@@ -230,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
     aplicarMascaraMoeda(condominioInput);
     aplicarMascaraMoeda(aguaInput);
     // aplicarMascaraMoeda(custo_do_dinheiro);
-    aplicarMascaraMoeda(vgvInput); 
+    aplicarMascaraMoeda(vgvInput);
 
     valor_aquisicao.addEventListener('input', (e) => {
         let valor = e.target.value.replace(/\D/g, '');
