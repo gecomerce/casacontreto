@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const valor_aquisicao = document.getElementById('valor_aquisicao');
     const itbiResultado = document.getElementById('itbi_resultado');
@@ -11,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const custo_obra_bruto_element = document.getElementById('custo_obra_bruto');
     const condominioInput = document.getElementById('valor_condominio');
     const aguaInput = document.getElementById('valor_agua_energia');
-    // const custo_do_dinheiro = document.getElementById('custo_dinheiro');
+    const custo_do_dinheiro = document.getElementById('custo_dinheiro');
     const custo_iptu = document.getElementById('valor_iptu');
     const resultadoFinanciamento = document.getElementById('resultado_financiamento');
     const preco_bruto_terreno = document.getElementById('preco_bruto_terreno');
@@ -106,11 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const condominio = limparValorMoeda(condominioInput.value) || 0;
         const agua = limparValorMoeda(aguaInput.value) || 0;
-        // const custododinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
+        const custododinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
 
-        // const custoBrutoObra = custoConstrucao + condominio + agua + custododinheiro;
-        const custoBrutoObra = custoConstrucao + condominio + agua;
-
+        const custoBrutoObra = custoConstrucao + condominio + agua + custododinheiro;
 
         custo_obra_bruto_element.textContent = `Custo Da Obra: ${formatarMoeda(custoBrutoObra)}`;
 
@@ -121,18 +117,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const condominio = limparValorMoeda(condominioInput.value) || 0;
         const agua = limparValorMoeda(aguaInput.value) || 0;
         const custo_iptu_val = limparValorMoeda(custo_iptu.value) || 0;
-        return condominio + agua + custo_iptu_val;
+        const custo_dinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
+        return condominio + agua + custo_iptu_val + custo_dinheiro;
     }
+
 
     function calcularTotal() {
         const condominio = limparValorMoeda(condominioInput.value) || 0;
         const agua = limparValorMoeda(aguaInput.value) || 0;
-        // const custododinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
+
         const iptu = limparValorMoeda(custo_iptu.value) || 0;
 
-        // const totalFinanciamento = condominio + agua + custododinheiro + iptu;
         const totalFinanciamento = condominio + agua + iptu;
-
 
         const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
         const custoObra = obterCustoTotalObra();
@@ -162,6 +158,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const total = terreno + financiamento + obraBruta;
         resultado_operacional.textContent = formatarMoeda(total);
     }
+
+    function calcularResultadoOperacional() {
+        const terreno = limparValorMoeda(valor_aquisicao.value) || 0;
+        const financiamento = limparValorTexto(resultadoFinanciamento.textContent) || 0;
+        const obraBruta = limparValorTexto(custo_obra_bruto_element.textContent) || 0;
+        const custoDinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
+
+        const total = terreno + financiamento + obraBruta + custoDinheiro;
+        resultado_operacional.textContent = formatarMoeda(total);
+    }
+
 
     function calcularSomaDosCards() {
         const custoTerrenoValor = calcularCustoTotalTerreno();
@@ -212,12 +219,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const quitacao = limparValorMoeda(document.getElementById('valor_quitacao').textContent);
         const corretagem = limparValorMoeda(document.getElementById('resultado_corretagem').textContent);
         const vgv = limparValorMoeda(vgvInput.value) || 0;
-        // const imposto = quitacao * 0.15;
+
         const imposto = (vgv - quitacao) * 0.15;
 
         document.getElementById('imposto_de_renda').textContent = formatarMoeda(imposto);
         const lucro = vgv - quitacao - imposto - corretagem;
-        document.getElementById('lucro_bruto').textContent = `Lucro Bruto: ${formatarMoeda(lucro)}`;
+        document.getElementById('lucro_liquido').textContent = `Lucro Liquido: ${formatarMoeda(lucro)}`;
     }
 
     function calcularLucroPadeiro() {
@@ -226,10 +233,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const lucroPadeiro = vgv - quitacao;
 
-        document.getElementById('lucro_padeiro').textContent = `Lucro do Padeiro: ${formatarMoeda(lucroPadeiro)}`;
+        document.getElementById('lucro_bruto').textContent = `Lucro do Bruto: ${formatarMoeda(lucroPadeiro)}`;
     }
 
-
+    // -------------------------------------------------------------------------
 
     function aplicarMascaraMoeda(input) {
         input.addEventListener('input', (e) => {
@@ -242,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     aplicarMascaraMoeda(condominioInput);
     aplicarMascaraMoeda(aguaInput);
-    // aplicarMascaraMoeda(custo_do_dinheiro);
+    aplicarMascaraMoeda(custo_do_dinheiro);
     aplicarMascaraMoeda(vgvInput);
 
     valor_aquisicao.addEventListener('input', (e) => {
@@ -281,7 +288,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     condominioInput.addEventListener('change', calcularResultadoOperacional);
     aguaInput.addEventListener('change', calcularResultadoOperacional);
-    // custo_do_dinheiro.addEventListener('change', calcularResultadoOperacional);
     custo_obra_bruto_element.addEventListener('DOMSubtreeModified', calcularResultadoOperacional);
 
     preco_bruto_terreno.textContent = `Valor Bruto do Terreno: ${valor_aquisicao.value}`;
