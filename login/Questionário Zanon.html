@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <title>Documentação</title>
+</head>
+
+<body>
+
+    <iframe id="tela" src="https://docs.google.com/document/d/e/2PACX-1vTTYOqNCILuL1gsi20F9Cta5lOPpziONixPND9dn7MJ8tMK3yzTMe-0RBMuXbYDOw/pub?embedded=true"></iframe>
+
+</body>
+
+<script>
+    if (sessionStorage.getItem("logon") !== "1") {
+        alert("Acesso não autorizado! Você será redirecionado para a tela de login.");
+        window.location.href = "index.html";
+    }
+</script>
+
+</html>
+
