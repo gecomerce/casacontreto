@@ -1,8 +1,16 @@
 
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
 
-    sessionStorage.clear();
-    localStorage.clear();
+
+    if (localStorage.getItem("logon") === "1") {
+        document.getElementById("container-login").classList.add("desapear");
+        document.getElementById("logged-message").innerHTML = localStorage.getItem("user_name") || "Usuário";
+
+        const userData = JSON.parse(localStorage.getItem("user_data") || "{}");
+        if (userData.user) {
+            atualizarInterface(userData);
+        }
+    }
 
     configurarFormularioLogin();
 
@@ -13,7 +21,7 @@ window.addEventListener("load", function () {
 
             const username = document.getElementById("input-user").value.trim();
             const password = document.getElementById("password").value.trim();
-            
+
 
 
             if (!username || !password) {
@@ -80,13 +88,14 @@ window.addEventListener("load", function () {
     }
 
     function realizarLogin(userData) {
-        sessionStorage.setItem("logon", "1");
-        sessionStorage.setItem("currentUser", userData.user);
+        localStorage.setItem("logon", "1");
+        localStorage.setItem("currentUser", userData.user);
 
-        window.dispatchEvent(new Event("storage")); 
+        window.dispatchEvent(new Event("storage"));
 
-        sessionStorage.setItem("user_name", userData.nickname);
-        
+        localStorage.setItem("user_data", JSON.stringify(userData));
+        localStorage.setItem("user_name", userData.nickname);
+
         atualizarInterface(userData);
     }
 
@@ -108,9 +117,9 @@ window.addEventListener("load", function () {
                     toggleMenu();
                 };
 
-            
+
                 sidebar.appendChild(botao);
-                
+
                 if (!primeiroModuloLiberado) {
                     primeiroModuloLiberado = modulo;
                 }
@@ -124,6 +133,7 @@ window.addEventListener("load", function () {
         document.getElementById("container-login").classList.add("desapear");
         document.getElementById("logged-message").innerHTML = userData.nickname;
 
+
     }
 });
 
@@ -135,11 +145,14 @@ function toggleMenu() {
 document.getElementById("menu-icon").addEventListener("click", toggleMenu);
 
 function Exit() {
-    sessionStorage.removeItem("logon");
-    sessionStorage.removeItem("currentUser");
+    localStorage.removeItem("logon");
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("user_name");
 
     document.getElementById("container-login").classList.remove("desapear");
     document.getElementById("iframe").src = "";
     document.getElementById("logged-message").innerHTML = "";
     window.location.reload();
 }
+
+
