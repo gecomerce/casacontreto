@@ -1,6 +1,4 @@
-
 window.addEventListener("DOMContentLoaded", function () {
-
 
     if (localStorage.getItem("logon") === "1") {
         document.getElementById("container-login").classList.add("desapear");
@@ -21,8 +19,6 @@ window.addEventListener("DOMContentLoaded", function () {
 
             const username = document.getElementById("input-user").value.trim();
             const password = document.getElementById("password").value.trim();
-
-
 
             if (!username || !password) {
                 exibirAlerta("Usuário e senha são obrigatórios!");
@@ -47,7 +43,6 @@ window.addEventListener("DOMContentLoaded", function () {
             if (!planilhaResponse.ok) throw new Error("Erro ao carregar a planilha.");
 
             const csvText = await planilhaResponse.text();
-
             return processarCSV(csvText);
         } catch (error) {
             console.error("Erro:", error);
@@ -90,34 +85,27 @@ window.addEventListener("DOMContentLoaded", function () {
     function realizarLogin(userData) {
         localStorage.setItem("logon", "1");
         localStorage.setItem("currentUser", userData.user);
-
-        window.dispatchEvent(new Event("storage"));
-
         localStorage.setItem("user_data", JSON.stringify(userData));
         localStorage.setItem("user_name", userData.nickname);
+        window.dispatchEvent(new Event("storage"));
 
         atualizarInterface(userData);
     }
 
     function atualizarInterface(userData) {
         const sidebar = document.getElementById("sidebar");
-
-
         sidebar.querySelectorAll("button").forEach(botao => botao.remove());
 
         let primeiroModuloLiberado = null;
 
-
         Object.keys(userData).forEach(modulo => {
-            if (modulo !== "user" && modulo !== "password" && userData[modulo].toLowerCase() === "liberado") {
+            if (!["user", "password", "nickname", "imagem"].includes(modulo) && userData[modulo].toLowerCase() === "liberado") {
                 let botao = document.createElement("button");
                 botao.textContent = modulo;
                 botao.onclick = function () {
                     document.getElementById("iframe").src = `${modulo}.html`;
                     toggleMenu();
                 };
-
-
                 sidebar.appendChild(botao);
 
                 if (!primeiroModuloLiberado) {
@@ -133,12 +121,16 @@ window.addEventListener("DOMContentLoaded", function () {
         document.getElementById("container-login").classList.add("desapear");
         document.getElementById("logged-message").innerHTML = userData.nickname;
 
-
+      
+        const imagem = document.getElementById("user-image");
+        if (imagem) {
+            imagem.src = userData.imagem || "./img/logo2.png";
+        }
     }
 });
 
 function toggleMenu() {
-    var sidebar = document.getElementById("sidebar");
+    const sidebar = document.getElementById("sidebar");
     sidebar.style.left = (sidebar.style.left === "0px") ? "-250px" : "0px";
 }
 
@@ -154,5 +146,3 @@ function Exit() {
     document.getElementById("logged-message").innerHTML = "";
     window.location.reload();
 }
-
-
