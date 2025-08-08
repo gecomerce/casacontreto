@@ -10,6 +10,8 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // --------------------------------------------------------------
+
     configurarFormularioLogin();
 
     function configurarFormularioLogin() {
@@ -28,6 +30,8 @@ window.addEventListener("DOMContentLoaded", function () {
             await validarCredenciais(username, password);
         });
     }
+
+    // --------------------------------------------------------------
 
     async function obterDadosPlanilha() {
         try {
@@ -51,6 +55,8 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // --------------------------------------------------------------
+
     async function validarCredenciais(username, password) {
         const usuarios = await obterDadosPlanilha();
         const user = usuarios.find(u => u.user === username && u.password === password);
@@ -61,6 +67,8 @@ window.addEventListener("DOMContentLoaded", function () {
             exibirAlerta("Usuário ou senha incorretos!");
         }
     }
+
+    // --------------------------------------------------------------
 
     function processarCSV(csvText) {
         const linhas = csvText.split("\n").map(l => l.trim()).filter(l => l);
@@ -76,11 +84,15 @@ window.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // --------------------------------------------------------------
+
     function exibirAlerta(mensagem) {
         const alert = document.getElementById("alert");
         alert.innerText = mensagem;
         alert.style.display = "block";
     }
+
+    // --------------------------------------------------------------
 
     function realizarLogin(userData) {
         localStorage.setItem("logon", "1");
@@ -91,6 +103,8 @@ window.addEventListener("DOMContentLoaded", function () {
 
         atualizarInterface(userData);
     }
+
+    // --------------------------------------------------------------
 
     function atualizarInterface(userData) {
         const sidebar = document.getElementById("sidebar");
@@ -120,7 +134,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
         document.getElementById("container-login").classList.add("desapear");
         document.getElementById("logged-message").innerHTML = userData.nickname;
-
+  
       
         const imagem = document.getElementById("user-image");
         if (imagem) {
@@ -129,10 +143,16 @@ window.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+    // --------------------------------------------------------------
+
+
 function toggleMenu() {
     const sidebar = document.getElementById("sidebar");
     sidebar.style.left = (sidebar.style.left === "0px") ? "-250px" : "0px";
 }
+
+    // --------------------------------------------------------------
+
 
 document.getElementById("menu-icon").addEventListener("click", toggleMenu);
 
@@ -146,3 +166,5 @@ function Exit() {
     document.getElementById("logged-message").innerHTML = "";
     window.location.reload();
 }
+
+// --------------------------------------------------------------
