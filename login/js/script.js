@@ -58,12 +58,17 @@ window.addEventListener("DOMContentLoaded", function () {
     // --------------------------------------------------------------
 
     async function validarCredenciais(username, password) {
+        document.getElementById('loading').style.display = "flex";
         const usuarios = await obterDadosPlanilha();
         const user = usuarios.find(u => u.user === username && u.password === password);
 
         if (user) {
+            document.getElementById('loading').style.display = "none";
+
             realizarLogin(user);
+
         } else {
+            document.getElementById('loading').style.display = "none";
             exibirAlerta("Usuário ou senha incorretos!");
         }
     }
@@ -134,8 +139,8 @@ window.addEventListener("DOMContentLoaded", function () {
 
         document.getElementById("container-login").classList.add("desapear");
         document.getElementById("logged-message").innerHTML = userData.nickname;
-  
-      
+
+
         const imagem = document.getElementById("user-image");
         if (imagem) {
             imagem.src = userData.imagem || "./img/logo2.png";
@@ -143,7 +148,7 @@ window.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-    // --------------------------------------------------------------
+// --------------------------------------------------------------
 
 
 function toggleMenu() {
@@ -151,7 +156,7 @@ function toggleMenu() {
     sidebar.style.left = (sidebar.style.left === "0px") ? "-250px" : "0px";
 }
 
-    // --------------------------------------------------------------
+// --------------------------------------------------------------
 
 
 document.getElementById("menu-icon").addEventListener("click", toggleMenu);
@@ -167,5 +172,5 @@ function Exit() {
     window.location.reload();
 }
 
-    // --------------------------------------------------------------
+// --------------------------------------------------------------
 
