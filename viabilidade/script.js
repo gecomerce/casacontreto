@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalFinal = valorTerreno + custoObra + custoOperacional;
 
         resultado_operacional.textContent = `Total Operacional: ${formatarMoeda(totalFinal)}`;
-        document.getElementById('valor_quitacao').textContent = formatarMoeda(totalFinal);
+        document.getElementById('valor_quitacao').textContent = `Total Quitação ${formatarMoeda(totalFinal)}`;
     }
 
 
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const imposto = (vgv - quitacao) * 0.15;
 
-        document.getElementById('imposto_de_renda').textContent = formatarMoeda(imposto);
+        document.getElementById('imposto_de_renda').textContent = ` Imposto de Renda: ${formatarMoeda(imposto)}`;
         const lucro = vgv - quitacao - imposto - corretagem;
         document.getElementById('lucro_liquido').textContent = `Lucro Liquido: ${formatarMoeda(lucro)}`;
     }
