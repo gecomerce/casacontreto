@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.target.value = formatarMoeda(valorNumerico);
 
         let valorITBI = valorNumerico * ibti;
-        itbiResultado.textContent = `Resultado ITBI: ${formatarMoeda(valorITBI)}`;
+        itbiResultado.textContent = `Resultado ITBI (2%): ${formatarMoeda(valorITBI)}`;
 
         preco_bruto_terreno.textContent = `Valor Bruto do Terreno: ${formatarMoeda(valorNumerico)}`;
 
