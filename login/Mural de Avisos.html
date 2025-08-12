@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <title>Casa 3D</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
+
+<body>
+
+    <h1>📌 Mural de Avisos</h1>
+
+    <div class="mural">
+
+        <div class="aviso">
+            <h2>Manutenção</h2>
+            <p>Dia 15/08 das 02h às 04h o sistema estará fora do ar.</p>
+        </div>
+        <div class="aviso">
+            <h2>Reunião</h2>
+            <p>Próxima reunião geral: 20/08 às 09h no auditório.</p>
+        </div>
+        <div class="aviso">
+            <h2>Nova Função</h2>
+            <p>Agora é possível gerar relatórios mensais no sistema.</p>
+        </div>
+        <div class="aviso">
+            <h2>Aviso</h2>
+            <p>Não se esqueça de trocar sua senha a cada 90 dias.</p>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    if (localStorage.getItem("logon") !== "1") {
+        alert("Acesso não autorizado! Você será redirecionado para a tela de login.");
+        window.location.href = "index.html";
+    }
+</script>
+
+</html>
