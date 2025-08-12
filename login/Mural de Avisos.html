@@ -10,6 +10,7 @@
 </head>
 
 <style>
+
     * {
         margin: 0;
         padding: 0;
@@ -23,6 +24,44 @@
         flex-direction: column;
         align-items: center;
     }
+
+    h1 {
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    .mural {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .aviso {
+        background: #fff9c4;
+        padding: 15px;
+        border-radius: 8px;
+        width: 80vw;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+        transform: rotate(-1deg);
+        transition: transform 0.2s ease;
+    }
+
+    .aviso:hover {
+        transform: rotate(0deg) scale(1.02);
+    }
+
+    .aviso h2 {
+        margin-top: 0;
+        color: #444;
+    }
+
+    .aviso p {
+        color: #555;
+        font-size: 14px;
+    }
+
 </style>
 
 <body>
@@ -32,21 +71,20 @@
     <div class="mural">
 
         <div class="aviso">
-            <h2>Manutenção</h2>
-            <p>Dia 15/08 das 02h às 04h o sistema estará fora do ar.</p>
+            <h2>Aviso 1</h2>
+            <p>Texto de exemplo de aviso.</p>
         </div>
+
         <div class="aviso">
-            <h2>Reunião</h2>
-            <p>Próxima reunião geral: 20/08 às 09h no auditório.</p>
+            <h2>Aviso 2</h2>
+            <p>Texto de exemplo de aviso.</p>
         </div>
+
         <div class="aviso">
-            <h2>Nova Função</h2>
-            <p>Agora é possível gerar relatórios mensais no sistema.</p>
+            <h2>Aviso 3</h2>
+            <p>Texto de exemplo de aviso.</p>
         </div>
-        <div class="aviso">
-            <h2>Aviso</h2>
-            <p>Não se esqueça de trocar sua senha a cada 90 dias.</p>
-        </div>
+
     </div>
 
 </body>
