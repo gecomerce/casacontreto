@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    
     const valor_aquisicao = document.getElementById('valor_aquisicao');
     const itbiResultado = document.getElementById('itbi_resultado');
     const qtdUnidades = document.getElementById('qtd_unidades');
@@ -23,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const vgvInput = document.getElementById('vgv');
     const corretor = document.getElementById('corretor');
     const propaganda = document.getElementById('propaganda');
-
     const ibti = 0.02;
     const rgi = 0.0075;
     const percentual_construtor = 0.1;
@@ -212,7 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('resultado_corretagem').textContent = totalCorretagemEl.textContent;
     }
-
 
 
     function calcularLucroBruto() {
