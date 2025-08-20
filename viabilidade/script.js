@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     const valor_aquisicao = document.getElementById('valor_aquisicao');
     const itbiResultado = document.getElementById('itbi_resultado');
     const qtdUnidades = document.getElementById('qtd_unidades');
@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const porcentagem_propaganda = 0.01;
     const habite_se_porcentagem = 0.04;
     const percentualIPTU = 0.007;
+    const percentual_lucro = document.getElementById('percentual_lucro');
 
     const VGV_PADRAO = 380000; // valor fixo se não for digitado
 
@@ -214,12 +215,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const quitacao = limparValorMoeda(document.getElementById('valor_quitacao').textContent);
         const corretagem = limparValorMoeda(document.getElementById('resultado_corretagem').textContent);
         const vgv = obterVGV();
-
         const imposto = (vgv - quitacao) * 0.15;
+
 
         document.getElementById('imposto_de_renda').textContent = ` Imposto de Renda: ${formatarMoeda(imposto)}`;
         const lucro = vgv - quitacao - imposto - corretagem;
         document.getElementById('lucro_liquido').textContent = `Lucro Liquido: ${formatarMoeda(lucro)}`;
+
+        const valor_lucro = (lucro / vgv) * 100;
+
+        document.getElementById('percentual_lucro').textContent = `Percentual Lucro: ${valor_lucro.toFixed(0)}%`;
+
     }
 
     function calcularLucroPadeiro() {
