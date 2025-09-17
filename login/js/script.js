@@ -147,41 +147,6 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // function atualizarInterface(userData) {
-    //     const botoesContainer = document.getElementById("main-buttons");
-    //     botoesContainer.innerHTML = ""; // limpa botões anteriores
-
-    //     let primeiroModuloLiberado = null;
-
-    //     Object.keys(userData).forEach(modulo => {
-    //         if (!["user", "password", "nickname", "imagem"].includes(modulo) && userData[modulo].toLowerCase() === "liberado") {
-    //             let botao = document.createElement("button");
-    //             botao.textContent = modulo;
-    //             botao.classList.add("botao-modulo");
-    //             botao.onclick = function () {
-    //                 document.getElementById("iframe").src = `${modulo}.html`;
-    //             };
-    //             botoesContainer.appendChild(botao);
-
-    //             if (!primeiroModuloLiberado) {
-    //                 primeiroModuloLiberado = modulo;
-    //             }
-    //         }
-    //     });
-
-    //     if (primeiroModuloLiberado) {
-    //         document.getElementById("iframe").src = `${primeiroModuloLiberado}.html`;
-    //     }
-
-    //     document.getElementById("container-login").classList.add("desapear");
-    //     document.getElementById("logged-message").innerHTML = userData.nickname;
-
-    //     const imagem = document.getElementById("user-image");
-    //     if (imagem) {
-    //         imagem.src = userData.imagem || "./img/logo2.png";
-    //     }
-    // }
-
 });
 
 // --------------------------------------------------------------
