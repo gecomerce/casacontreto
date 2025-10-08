@@ -33,7 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const percentualIPTU = 0.007;
     const percentual_lucro = document.getElementById('percentual_lucro');
 
-    const VGV_PADRAO = 380000; // valor fixo se não for digitado
+    // const VGV_PADRAO = 380000;
+    const VGV_PADRAO = 0;
+
 
     function obterVGV() {
         return limparValorMoeda(vgvInput.value) || VGV_PADRAO;
