@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const manutencao_indenizacao = document.getElementById('manutencao_indenizacao');
     const resultado = document.getElementById('resultado');
 
-
     const insumos = 1000;
 
     // ----------------------------------------------------------
@@ -39,7 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----------------------------------------------------------
+
     // Atualiza o cálculo automaticamente ao digitar
+    
     qtdUnidadesInput.addEventListener('input', calcularTotal);
     qtdMesLocacaoInput.addEventListener('input', calcularTotal);
     custoFreteInput.addEventListener('input', calcularTotal);
