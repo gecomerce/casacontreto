@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
     qtdUnidadesInput.addEventListener('input', calcularTotal);
     qtdMesLocacaoInput.addEventListener('input', calcularTotal);
     custoFreteInput.addEventListener('input', calcularTotal);
-
+    manutencao_indenizacao.addEventListener('input', calcularTotal);
+    
     // cálculo inicial
     calcularTotal();
 
