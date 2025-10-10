@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const custoFreteInput = document.getElementById('custo_frete');
     const manutencao_indenizacao = document.getElementById('manutencao_indenizacao');
     const resultado = document.getElementById('resultado');
+    const resultado_por_uh = document.getElementById('resultado_por_uh');
 
     const insumos = 1000;
 
@@ -29,10 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const custoFrete = Number(custoFreteInput.value) || 0;
         const custo_aluguel = Number(valor_aluguel_mensal.value) || 0;
         const manutencao = Number(manutencao_indenizacao.value) || 0;
+        const qtd_unidades = Number(qtdUnidadesInput.value) || 0;
+        
 
         const totalInsumos = CalcularInsumos();
 
         const totalGeral = qtdMesLocacao * custo_aluguel + custoFrete + manutencao + totalInsumos;
+
+        const total_por_uh = totalGeral / qtd_unidades
+
+
+        resultado_por_uh.textContent = formatarMoeda(total_por_uh);
 
         resultado.textContent = formatarMoeda(totalGeral);
     }
