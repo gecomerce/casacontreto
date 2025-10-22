@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <title>Casa Concreto</title>
 
 </head>
@@ -61,6 +63,15 @@
         height: 580px;
         border: none;
         margin-top: 10px;
+    }
+
+    #map {
+        /* display: none; */
+        height: 500px;
+        margin: 30px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.15);
     }
 </style>
 
@@ -307,7 +318,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="about_image mt-50 wow fadeInRightBig" data-wow-duration="1.3s" data-wow-delay="0.5s">
-                        <img src="assets/images/about_image.jpg" alt="About">
+                        <img src="assets/images/about_image.png" alt="About">
                     </div>
                 </div>
 
@@ -424,7 +435,8 @@
 
                     <div class="single_logo mt-30 wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.2s">
 
-                        <img src="assets/images/CORRETORES/Corretor A.png" alt="logo">
+                        <img src="assets/images/CORRETORES/Vinicius.png" alt="logo" style="margin-bottom: 1vw;">
+                        <h6>Vinícius</h6>
 
                     </div>
                 </div>
@@ -465,23 +477,18 @@
 
     </section>
 
-    <!-- <div class="container-parceiro">
 
-
+    <div class="row justify-content-center" style="width: 100%;">
         <div class="col-lg-8">
-
-            <h4 class="title">Seja Nosso Parceiro</h4>
-
+            <div class="section_title text-center pb-25">
+                <h4 class="title">VISITE A CASA MODELO</h4>
+            </div>
         </div>
+    </div>
 
-        <div class="parceiro-btn">
+    <div id="map">
 
-            <button class="main-btn" onclick="window.open('https://app.pipefy.com/public/form/VLySH_fq', '_blank')">Ser
-                Parceiro</button>
-
-        </div>
-
-    </div> -->
+    </div>
 
 
     <section class="footer_area bg_cover" style="background-image: url(assets/images/footer_bg.jpg)">
@@ -538,28 +545,69 @@
     </section>
 
 
-    <script src="assets/js/popper.min.js"></script>
-
-
-    <script src="assets/js/wow.min.js"></script>
-
-
-    <script src="assets/js/main.js"></script>
-
-    <script src="assets/js/mobile-menu.js"></script>
-
-    <script>
-        function toggleForm1() {
-            const container = document.querySelector('.formContainer1');
-            container.classList.toggle('open');
-        }
-
-        function toggleForm2() {
-            const container = document.querySelector('.formContainer2');
-            container.classList.toggle('open');
-        }
-    </script>
-
 </body>
+
+
+<script src="assets/js/popper.min.js"></script>
+
+
+<script src="assets/js/wow.min.js"></script>
+
+
+<script src="assets/js/main.js"></script>
+
+<script src="assets/js/mobile-menu.js"></script>
+
+<script>
+    function toggleForm1() {
+        const container = document.querySelector('.formContainer1');
+        container.classList.toggle('open');
+    }
+
+    function toggleForm2() {
+        const container = document.querySelector('.formContainer2');
+        container.classList.toggle('open');
+    }
+</script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-o9N1j7kPjJYwHf7nJQWf1xSXMxSK4GpX2YDnJb6u0wY=" crossorigin=""></script>
+
+<script>
+
+    const latitude = -20.5373611;
+    const longitude = -47.4548611;
+
+    const map = L.map('map').setView([latitude, longitude], 5);
+
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+
+    L.marker([latitude, longitude])
+        .addTo(map)
+        .bindPopup(`
+        <div style="text-align:center;">
+          <p>Casa Modelo</p>
+          <img src="assets/images/20250512_083836.jpg" style="width:150px; border-radius:10px;">
+        </div>
+    `)
+        .openPopup();
+
+    // Marcador 2: Vinícius
+    L.marker([-21.25472, -48.322])
+        .addTo(map)
+        .bindPopup(`
+      <div style="text-align:center;">
+        <h4>Vinícius</h4>
+        <img src="assets/images/CORRETORES/Vinicius.png" style="width:100px; border-radius:50%;">
+        <p><a href="https://wa.me/5518981607638" target="_blank">Enviar Mensagem</a></p>
+      </div>
+    `);
+</script>
+
 
 </html>
