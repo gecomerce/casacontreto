@@ -42,22 +42,14 @@ a:hover {
 
 
 .bg_cover {
-  background-position: center center;
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
 }
 
-/* #features{
-  .container{
-    .row{
-      div{
-        cursor: pointer;
-      }
-    }
-  }
-} */
+
 
 /*===== All Button Style =====*/
 .section_title .title {
@@ -182,7 +174,8 @@ a:hover {
 .single_slider::before {
   position: absolute;
   content: '';
-  background-color: rgba(26, 49, 84, 0.52);
+  /* background-color: rgba(26, 49, 84, 0.52); */
+  background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
   height: 100%;
   left: 0;
