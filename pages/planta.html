@@ -16,17 +16,39 @@
         box-sizing: border-box;
     }
 
-    body{
+    body {
         height: 100vh;
         width: 100vw;
     }
 
+    #desktop {
+        display: block;
+    }
 
+
+    #mobile {
+        display: none;
+    }
+
+    @media (max-width: 768px) or (orientation: portrait) {
+
+        #mobile {
+            display: block;
+        }
+
+        #desktop {
+            display: none;
+        }
+
+
+    }
 </style>
 
 <body style="display: flex; justify-content: center;">
 
-    <img src="./planta baixa.png">
+    <img src="./planta baixa mobile.png" id="mobile">
+
+    <img src="./planta baixa desktop.png" id="desktop">
 
 </body>
 
