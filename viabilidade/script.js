@@ -27,18 +27,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const ibti = 0.02;
     const rgi = 0.0075;
     const percentual_construtor = 0.1;
-    const porcentagem_corretor = 0.1;
+    const porcentagem_corretor = 0.06;
     const porcentagem_propaganda = 0.01;
     const habite_se_porcentagem = 0.04;
     const percentualIPTU = 0.007;
     const percentual_lucro = document.getElementById('percentual_lucro');
 
-    // const VGV_PADRAO = 380000;
     const VGV_PADRAO = 0;
-
 
     function obterVGV() {
         return limparValorMoeda(vgvInput.value) || VGV_PADRAO;
+    }
+
+    function obterUnidades() {
+        // garante inteiro >= 1 (ou 0 se vazio)
+        const u = parseFloat(qtdUnidades.value);
+        if (isNaN(u) || u <= 0) return 0;
+        return Math.round(u);
     }
 
     function formatarMoeda(valor) {
@@ -50,12 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function limparValorMoeda(valor) {
         if (!valor) return 0;
-        return Number(valor.replace(/\D/g, '')) / 100;
+        if (typeof valor === 'number') return valor;
+        return Number(String(valor).replace(/\D/g, '')) / 100;
     }
 
     function limparValorTexto(texto) {
         if (!texto) return 0;
-        return Number(texto.replace(/\D/g, '')) / 100;
+        return Number(String(texto).replace(/\D/g, '')) / 100;
     }
 
     function calcularIPTU() {
@@ -70,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function obterCustoTotalObra() {
-        const unidades = parseFloat(qtdUnidades.value) || 0;
+        const unidades = obterUnidades() || 0;
         const area = parseFloat(metragem.value) || 0;
         const custo = limparValorMoeda(custoMetro.value) || 0;
         return unidades * area * custo;
@@ -101,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function calcularCustoObra() {
-        const unidades = parseFloat(qtdUnidades.value) || 0;
+        const unidades = obterUnidades();
         const area = parseFloat(metragem.value) || 0;
         const custo = limparValorMoeda(custoMetro.value) || 0;
 
@@ -129,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const custo_dinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
         return condominio + agua + custo_iptu_val + custo_dinheiro;
     }
-
 
     function calcularTotal() {
         const condominio = limparValorMoeda(condominioInput.value) || 0;
@@ -169,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resultado_operacional.textContent = formatarMoeda(total);
     }
 
-
     function calcularSomaDosCards() {
         const custoTerrenoValor = calcularCustoTotalTerreno();
         const obraFinanciamentoTexto = CustoObraValores();
@@ -196,11 +200,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('valor_quitacao').textContent = `Total Quitação ${formatarMoeda(totalFinal)}`;
     }
 
-
     function CalcularCorretagem() {
-        const vgv = obterVGV();
-        const corretor_valor = vgv * porcentagem_corretor;
-        const propaganda_valor = vgv * porcentagem_propaganda;
+        const unidades = obterUnidades() || 1;
+        const vgvUnitario = obterVGV(); // considera VGV informado
+        // TRATAMENTO: multiplica pela quantidade de unidades para obter VGV total
+        const vgvTotal = vgvUnitario * (unidades || 1);
+
+        const corretor_valor = vgvTotal * porcentagem_corretor;
+        const propaganda_valor = vgvTotal * porcentagem_propaganda;
         const total = corretor_valor + propaganda_valor;
 
         corretor.textContent = formatarMoeda(corretor_valor);
@@ -212,29 +219,35 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('resultado_corretagem').textContent = totalCorretagemEl.textContent;
     }
 
-
     function calcularLucroBruto() {
-        const quitacao = limparValorMoeda(document.getElementById('valor_quitacao').textContent);
-        const corretagem = limparValorMoeda(document.getElementById('resultado_corretagem').textContent);
-        const vgv = obterVGV();
-        const imposto = (vgv - quitacao) * 0.15;
+        const unidades = obterUnidades() || 1;
+        const vgvUnitario = obterVGV();
+        const vgvTotal = vgvUnitario * unidades;
 
+        const quitacao = limparValorMoeda(document.getElementById('valor_quitacao').textContent) || 0;
+        const corretagemText = document.getElementById('resultado_corretagem').textContent || '';
+        const corretagem = limparValorMoeda(corretagemText) || 0;
+
+        // imposto é 15% sobre a diferença entre VGV total e quitacao
+        const imposto = Math.max(0, (vgvTotal - quitacao) * 0.15);
 
         document.getElementById('imposto_de_renda').textContent = ` Imposto de Renda: ${formatarMoeda(imposto)}`;
-        const lucro = vgv - quitacao - imposto - corretagem;
+        const lucro = vgvTotal - quitacao - imposto - corretagem;
         document.getElementById('lucro_liquido').textContent = `Lucro Liquido: ${formatarMoeda(lucro)}`;
 
-        const valor_lucro = (lucro / vgv) * 100;
+        const valor_lucro = vgvTotal ? (lucro / vgvTotal) * 100 : 0;
 
         document.getElementById('percentual_lucro').textContent = `Percentual Lucro: ${valor_lucro.toFixed(0)}%`;
-
     }
 
     function calcularLucroPadeiro() {
-        const quitacao = limparValorMoeda(document.getElementById('valor_quitacao').textContent);
-        const vgv = obterVGV();
+        const unidades = obterUnidades() || 1;
+        const vgvUnitario = obterVGV();
+        const vgvTotal = vgvUnitario * unidades;
 
-        const lucroPadeiro = vgv - quitacao;
+        const quitacao = limparValorMoeda(document.getElementById('valor_quitacao').textContent) || 0;
+
+        const lucroPadeiro = vgvTotal - quitacao;
 
         document.getElementById('lucro_bruto').textContent = `Lucro do Bruto: ${formatarMoeda(lucroPadeiro)}`;
     }
@@ -278,6 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
     qtdUnidades.addEventListener('change', () => {
         calcularCustoObra();
         calcularTotal();
+        CalcularCorretagem();
     });
 
     metragem.addEventListener('change', () => {
@@ -287,6 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     vgvInput.addEventListener('input', () => {
         CalcularCorretagem();
+        calcularLucroPadeiro();
+        calcularLucroBruto();
     });
 
     condominioInput.addEventListener('change', calcularResultadoOperacional);
