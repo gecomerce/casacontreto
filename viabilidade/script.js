@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ibti = 0.02;
     const rgi = 0.0075;
     const percentual_construtor = 0.1;
-    const porcentagem_corretor = 0.06;
+    const porcentagem_corretor = 0.1;
     const porcentagem_propaganda = 0.01;
     const habite_se_porcentagem = 0.04;
     const percentualIPTU = 0.007;
@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function obterUnidades() {
-        // garante inteiro >= 1 (ou 0 se vazio)
         const u = parseFloat(qtdUnidades.value);
         if (isNaN(u) || u <= 0) return 0;
         return Math.round(u);
