@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800");
 
 :root {
-  --cor_texto: #ee0909;
+  --cor_texto: #000;
 }
 
 html {
@@ -49,7 +49,16 @@ a:hover {
   height: 100%;
 }
 
-
+button {
+  /* background: #06c545; */
+  background: #793CBD;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
 
 /*===== All Button Style =====*/
 .section_title .title {
@@ -154,11 +163,11 @@ a:hover {
 
 
 .sticky .navbar-toggler .toggler-icon {
-  background-color: #222;
+  background-color: #793CBD;
 }
 
 .sticky .navbar-nav .nav-item a {
-  color: #222;
+  color: #793CBD;
 }
 
 
@@ -192,10 +201,7 @@ a:hover {
   margin-top: 15px;
 }
 
-.slider_content .slider_title span {
-  display: contents;
-  color: #FFB316;
-}
+
 
 .slider_content p {
   font-size: 16px;
@@ -219,7 +225,7 @@ a:hover {
 .single_features .features_content .features_title a {
   font-size: 30px;
   font-weight: 600;
-  color: #1A3154;
+  color: #793CBD;
   margin-top: 30px;
 }
 
@@ -317,52 +323,9 @@ a:hover {
 }
 
 
-/*===========================
-       05.SERVICES css 
-===========================*/
-.single_services .services_icon i {
-  width: 65px;
-  height: 65px;
-  line-height: 65px;
-  font-size: 40px;
-  color: #16aaff;
-  text-align: center;
-  background-color: #fff;
-  border-radius: 10px;
-  border-bottom-right-radius: 0;
-  -webkit-box-shadow: 0px 3px 10px 0px rgba(213, 213, 213, 0.4);
-  -moz-box-shadow: 0px 3px 10px 0px rgba(213, 213, 213, 0.4);
-  box-shadow: 0px 3px 10px 0px rgba(213, 213, 213, 0.4);
-}
-
-.single_services .services_content {
-  margin-top: 25px;
-}
-
-.single_services .services_content .title {
-  font-size: 30px;
-  font-weight: 700;
-  object-fit: cover;
-  object-position: center;
-}
-
-.single_services .services_content p {
-  margin-top: 25px;
-}
 
 
 
-.single_logo img {
-  border-radius: 50%;
-  -webkit-box-shadow: 0px 3px 24px 0px rgba(213, 213, 213, 0.49);
-  -moz-box-shadow: 0px 3px 24px 0px rgba(213, 213, 213, 0.49);
-  box-shadow: 0px 3px 24px 0px rgba(213, 213, 213, 0.49);
-  width: 100%;
-}
-
-.single_logo.logo_2 {
-  padding-top: 158px;
-}
 
 
 .single_info {
@@ -403,7 +366,7 @@ a:hover {
   content: '';
   top: 0;
   left: 0;
-  background-color: rgba(26, 49, 84, 0.95);
+  background-color: #793CBD;
   width: 100%;
   height: 100%;
   z-index: -1;
