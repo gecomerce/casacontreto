@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" href="assets/css/LineIcons.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="assets/css/default.css"> -->
+    <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -44,6 +44,11 @@
 
     }
 
+    .row_cards {
+        display: flex;
+        flex-direction: row;
+    }
+
 
     iframe {
         width: 100%;
@@ -60,8 +65,17 @@
         overflow: hidden;
         box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.15);
     }
-</style>
 
+    @media screen and (max-width: 968px){
+
+        .row_cards {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+    }
+</style>
 
 
 <body>
@@ -170,7 +184,7 @@
                 </div>
             </div>
 
-            <div class="row_cards" style="display: flex; flex-direction: row;">
+            <div class="row_cards">
 
                 <div class="col-lg-4 col-md-4">
 
