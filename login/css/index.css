@@ -1,6 +1,6 @@
 :root {
     --bg: #ffffff;
-    --cor-texto: #080707;
+    --cor-texto: #793CBD;
     --cor-container: #ffffff;
 }
 
@@ -136,7 +136,12 @@ form {
     width: 25vw;
     height: auto;
     box-shadow: 0rem 0.3rem 1rem black;
-    ;
+
+    button{
+        background-color: var(--cor-texto);
+        width: 90%;
+        padding: 1.2vw;
+    }
 }
 
 input {
