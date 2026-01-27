@@ -95,15 +95,19 @@ document.addEventListener('DOMContentLoaded', () => {
         registroResultado.textContent = `Certidão (13% ITBI): ${formatarMoeda(custo_registro)}`;
     }
 
+    // ----------------------------------------------------------------------
+
     function calcularCustoTotalTerreno() {
         const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
         const itbiValor = valorTerreno * ibti;
         const rgiValor = (valorTerreno + obterCustoTotalObra()) * rgi;
         const certidoes = itbiValor * 0.13;
-        const totalTerreno = itbiValor + rgiValor + certidoes;
+        const totalTerreno = valorTerreno + itbiValor + rgiValor + certidoes;
         custoTotalTerrenoEl.textContent = `Total do Terreno: ${formatarMoeda(totalTerreno)}`;
         return totalTerreno;
     }
+
+    // ----------------------------------------------------------------------
 
     function calcularCustoObra() {
         const unidades = obterUnidades();
