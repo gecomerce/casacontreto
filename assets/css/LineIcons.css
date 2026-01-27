@@ -626,29 +626,8 @@ p {
   }
 }
 
-@media (max-width: 767px) {
-  .navbar-nav .nav-item:hover .sub-menu {
-    top: 0;
-  }
-}
 
-.navbar-nav .nav-item .sub-menu {
-  width: 200px;
-  background-color: #fff;
-  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 110%;
-  left: 0;
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transition: all 0.3s ease-out 0s;
-  -moz-transition: all 0.3s ease-out 0s;
-  -ms-transition: all 0.3s ease-out 0s;
-  -o-transition: all 0.3s ease-out 0s;
-  transition: all 0.3s ease-out 0s;
-}
+
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .navbar-nav .nav-item .sub-menu {

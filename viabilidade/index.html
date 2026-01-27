@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casa concretto</title>
+    <title>Viablidade</title>
     <link rel="shortcut icon" href="/assets/images/logo.jpg" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -41,7 +41,7 @@
                 <h3 id="rgi">Resultado RGI (0,75%): </h3>
 
                 <!-- <label>Certidões, Cópias e autentificações</label> -->
-                <h3 id="certidao_etc">Resultado: </h3>
+                <h3 id="certidao_etc">Certidão (13%): </h3>
 
                 <h2 id="custo_total_terreno">Total: R$ 0,00</h2>
 
@@ -89,9 +89,8 @@
 
                 <h3 id="habite_se">HABITE-SE + Averbação + ISS + INSS (despachante): R$0,00</h3>
 
-                <h3 id="resultado_financiamento"></h3>
+                <h3 id="resultado_despesas">Despesas Do Imóvel:</h3>
 
-                <h2 id="total_total"></h2>
 
             </div>
 
@@ -101,7 +100,7 @@
 
                 <h2>VGV (Valor Geral de Venda)</h2>
 
-                <label for="vgv">VGV Do Harvey</label>
+                <label for="vgv"></label>
                 <input type="text" id="vgv" placeholder="R$ 380.000,00">
 
             </div>
@@ -125,13 +124,27 @@
 
                 <h2>TOTAL OPERACIONAL</h2>
 
-                <label id="preco_bruto_terreno">Custo Bruto do Terreno: </label>
-                <label id="custo_obra_financiamento"></label>
-                <label id="custo_obra_bruto">Custo Relacionados a Obra:</label><br>
+                <label id="to_terreno"></label>
+                <label id="to_itbi"></label>
+                <label id="to_rgi"></label>
+                <label id="to_certidao"></label>
+
+                <label id="to_custo_obra"></label>
+                <label id="to_lucro_construtor"></label>
+
+                <label id="to_iptu"></label>
+                <label id="to_habite"></label>
+
+                <label id="to_condominio"></label>
+                <label id="to_agua_luz"></label>
+                <label id="to_custo_dinheiro"></label>
+
+                <hr>
 
                 <h2 id="resultado_operacional">R$ 0,00</h2>
 
             </div>
+
 
             <!-- ------------------------------------------------------------------>
 
@@ -148,7 +161,7 @@
                 <!-- <label>Corretagem:</label> -->
                 <h3 id="resultado_corretagem"></h3>
 
-                <h2 id="lucro_bruto">Lucro do Bruto: R$ 0,00</h2>
+                <h3 id="lucro_bruto">Lucro Bruto: R$ 0,00</h3>
 
                 <h2 id="lucro_liquido">Lucro Liquido: R$ 0,00</h2>
 

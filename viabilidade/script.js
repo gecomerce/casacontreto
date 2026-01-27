@@ -1,322 +1,202 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const valor_aquisicao = document.getElementById('valor_aquisicao');
-    const itbiResultado = document.getElementById('itbi_resultado');
-    const qtdUnidades = document.getElementById('qtd_unidades');
-    const metragem = document.getElementById('metragem_da_obra');
-    const custoMetro = document.getElementById('custo_por_metro');
-    const resultado = document.getElementById('custo_total_obra');
-    const lucro_construtor = document.getElementById('lucro_construtor');
-    const custo_obra_bruto_element = document.getElementById('custo_obra_bruto');
-    const condominioInput = document.getElementById('valor_condominio');
-    const aguaInput = document.getElementById('valor_agua_energia');
-    const custo_do_dinheiro = document.getElementById('custo_dinheiro');
-    const custo_iptu = document.getElementById('valor_iptu');
-    const resultadoFinanciamento = document.getElementById('resultado_financiamento');
-    const preco_bruto_terreno = document.getElementById('preco_bruto_terreno');
-    const custo_obra_financiamento = document.getElementById('custo_obra_financiamento');
-    const rgiResultado = document.getElementById('rgi');
-    const registroResultado = document.getElementById('certidao_etc');
-    const custoTotalTerrenoEl = document.getElementById('custo_total_terreno');
-    const habite_se = document.getElementById('habite_se');
-    const resultado_operacional = document.getElementById('resultado_operacional');
-    const total_total = document.getElementById('total_total');
-    const vgvInput = document.getElementById('vgv');
-    const corretor = document.getElementById('corretor');
-    const propaganda = document.getElementById('propaganda');
-    const ibti = 0.02;
-    const rgi = 0.0075;
-    const percentual_construtor = 0.1;
-    const porcentagem_corretor = 0.1;
-    const porcentagem_propaganda = 0.01;
-    const habite_se_porcentagem = 0.04;
-    const percentualIPTU = 0.007;
-    const percentual_lucro = document.getElementById('percentual_lucro');
+    /* ================= CONSTANTES ================= */
+    const ITBI = 0.02;
+    const RGI = 0.0075;
+    const CERTIDAO = 0.13;
+    const LUCRO_CONSTRUTOR = 0.10;
+    const IPTU = 0.007;
+    const HABITE_SE = 0.04;
+    const CORRETOR = 0.10;
+    const PROPAGANDA = 0.01;
+    const IR = 0.15;
 
-    const VGV_PADRAO = 0;
+    /* ================= HELPERS ================= */
+    const el = id => document.getElementById(id);
 
-    function obterVGV() {
-        return limparValorMoeda(vgvInput.value) || VGV_PADRAO;
-    }
+    const formatarMoeda = v =>
+        v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-    function obterUnidades() {
-        const u = parseFloat(qtdUnidades.value);
-        if (isNaN(u) || u <= 0) return 0;
-        return Math.round(u);
-    }
-
-    function formatarMoeda(valor) {
-        return valor.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        });
-    }
-
-    function limparValorMoeda(valor) {
-        if (!valor) return 0;
-        if (typeof valor === 'number') return valor;
-        return Number(String(valor).replace(/\D/g, '')) / 100;
-    }
-
-    function limparValorTexto(texto) {
-        if (!texto) return 0;
-        return Number(String(texto).replace(/\D/g, '')) / 100;
-    }
-
-    function calcularIPTU() {
-        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
-        const valorIPTU = valorTerreno * percentualIPTU;
-        custo_iptu.value = formatarMoeda(valorIPTU);
-    }
-
-    function obterValorITBI() {
-        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
-        return valorTerreno * ibti;
-    }
-
-    function obterCustoTotalObra() {
-        const unidades = obterUnidades() || 0;
-        const area = parseFloat(metragem.value) || 0;
-        const custo = limparValorMoeda(custoMetro.value) || 0;
-        return unidades * area * custo;
-    }
-
-    function calcularRGI() {
-        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
-        const custoObra = obterCustoTotalObra();
-        const baseCalculo = valorTerreno + custoObra;
-        const valorRGI = baseCalculo * rgi;
-        rgiResultado.textContent = `RGI (0,75%): ${formatarMoeda(valorRGI)}`;
-    }
-
-    function calcularCertidao() {
-        const valorITBI_ = obterValorITBI();
-        const custo_registro = valorITBI_ * 0.13;
-        registroResultado.textContent = `Certidão (13% ITBI): ${formatarMoeda(custo_registro)}`;
-    }
-
-    // ----------------------------------------------------------------------
-
-    function calcularCustoTotalTerreno() {
-        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
-        const itbiValor = valorTerreno * ibti;
-        const rgiValor = (valorTerreno + obterCustoTotalObra()) * rgi;
-        const certidoes = itbiValor * 0.13;
-        const totalTerreno = valorTerreno + itbiValor + rgiValor + certidoes;
-        custoTotalTerrenoEl.textContent = `Total do Terreno: ${formatarMoeda(totalTerreno)}`;
-        return totalTerreno;
-    }
-
-    // ----------------------------------------------------------------------
-
-    function calcularCustoObra() {
-        const unidades = obterUnidades();
-        const area = parseFloat(metragem.value) || 0;
-        const custo = limparValorMoeda(custoMetro.value) || 0;
-
-        const custoConstrucao = unidades * area * custo;
-        const resultado_construtor = custoConstrucao * percentual_construtor;
-
-        lucro_construtor.textContent = `Lucro do Construtor 10%: ${formatarMoeda(resultado_construtor)}`;
-        resultado.textContent = `Total: ${formatarMoeda(custoConstrucao)}`;
-
-        const condominio = limparValorMoeda(condominioInput.value) || 0;
-        const agua = limparValorMoeda(aguaInput.value) || 0;
-        const custododinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
-
-        const custoBrutoObra = custoConstrucao + condominio + agua + custododinheiro;
-
-        custo_obra_bruto_element.textContent = `Custo Da Obra: ${formatarMoeda(custoBrutoObra)}`;
-
-        calcularResultadoOperacional();
-    }
-
-    function CustoObraValores() {
-        const condominio = limparValorMoeda(condominioInput.value) || 0;
-        const agua = limparValorMoeda(aguaInput.value) || 0;
-        const custo_iptu_val = limparValorMoeda(custo_iptu.value) || 0;
-        const custo_dinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
-        return condominio + agua + custo_iptu_val + custo_dinheiro;
-    }
-
-    function calcularTotal() {
-        const condominio = limparValorMoeda(condominioInput.value) || 0;
-        const agua = limparValorMoeda(aguaInput.value) || 0;
-
-        const iptu = limparValorMoeda(custo_iptu.value) || 0;
-
-        const totalFinanciamento = condominio + agua + iptu;
-
-        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
-        const custoObra = obterCustoTotalObra();
-        const somaTotal = valorTerreno + custoObra;
-        const valorHabiteSe = somaTotal * habite_se_porcentagem;
-
-        habite_se.textContent = `Habite-se (4%): ${formatarMoeda(valorHabiteSe)}`;
-        resultadoFinanciamento.textContent = formatarMoeda(totalFinanciamento);
-        custo_obra_financiamento.textContent = resultadoFinanciamento.textContent;
-
-        calcularRGI();
-        calcularCertidao();
-        calcularCustoTotalTerreno();
-        calcularResultadoOperacional();
-        calcularSomaDosCards();
-        calcularTotalGeral();
-        CalcularCorretagem();
-        calcularLucroPadeiro();
-        calcularLucroBruto();
-    }
-
-    function calcularResultadoOperacional() {
-        const terreno = limparValorMoeda(valor_aquisicao.value) || 0;
-        const financiamento = limparValorTexto(resultadoFinanciamento.textContent) || 0;
-        const obraBruta = limparValorTexto(custo_obra_bruto_element.textContent) || 0;
-        const custoDinheiro = limparValorMoeda(custo_do_dinheiro.value) || 0;
-
-        const total = terreno + financiamento + obraBruta + custoDinheiro;
-        resultado_operacional.textContent = formatarMoeda(total);
-    }
-
-    function calcularSomaDosCards() {
-        const custoTerrenoValor = calcularCustoTotalTerreno();
-        const obraFinanciamentoTexto = CustoObraValores();
-
-        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
-        const custoObra = obterCustoTotalObra();
-        const somaTotal = valorTerreno + custoObra;
-        const valorHabiteSe = somaTotal * habite_se_porcentagem;
-
-        const totalFinal = custoTerrenoValor + valorHabiteSe + obraFinanciamentoTexto;
-
-        total_total.textContent = `Custo Operacional: ${formatarMoeda(totalFinal)}`;
-        custo_obra_financiamento.textContent = total_total.textContent;
-    }
-
-    function calcularTotalGeral() {
-        const valorTerreno = limparValorMoeda(valor_aquisicao.value) || 0;
-        const custoObra = limparValorTexto(custo_obra_bruto_element.textContent) || 0;
-        const custoOperacional = limparValorTexto(total_total.textContent) || 0;
-
-        const totalFinal = valorTerreno + custoObra + custoOperacional;
-
-        resultado_operacional.textContent = `Total Operacional: ${formatarMoeda(totalFinal)}`;
-        document.getElementById('valor_quitacao').textContent = `Total Quitação ${formatarMoeda(totalFinal)}`;
-    }
-
-    function CalcularCorretagem() {
-        const unidades = obterUnidades() || 1;
-        const vgvUnitario = obterVGV(); // considera VGV informado
-        // TRATAMENTO: multiplica pela quantidade de unidades para obter VGV total
-        const vgvTotal = vgvUnitario * (unidades || 1);
-
-        const corretor_valor = vgvTotal * porcentagem_corretor;
-        const propaganda_valor = vgvTotal * porcentagem_propaganda;
-        const total = corretor_valor + propaganda_valor;
-
-        corretor.textContent = formatarMoeda(corretor_valor);
-        propaganda.textContent = formatarMoeda(propaganda_valor);
-
-        const totalCorretagemEl = document.getElementById('total_corretagem');
-        totalCorretagemEl.textContent = `Total Corretagem: ${formatarMoeda(total)}`;
-
-        document.getElementById('resultado_corretagem').textContent = totalCorretagemEl.textContent;
-    }
-
-    function calcularLucroBruto() {
-        const unidades = obterUnidades() || 1;
-        const vgvUnitario = obterVGV();
-        const vgvTotal = vgvUnitario * unidades;
-
-        const quitacao = limparValorMoeda(document.getElementById('valor_quitacao').textContent) || 0;
-        const corretagemText = document.getElementById('resultado_corretagem').textContent || '';
-        const corretagem = limparValorMoeda(corretagemText) || 0;
-
-        // imposto é 15% sobre a diferença entre VGV total e quitacao
-        const imposto = Math.max(0, (vgvTotal - quitacao) * 0.15);
-
-        document.getElementById('imposto_de_renda').textContent = ` Imposto de Renda: ${formatarMoeda(imposto)}`;
-        const lucro = vgvTotal - quitacao - imposto - corretagem;
-        document.getElementById('lucro_liquido').textContent = `Lucro Liquido: ${formatarMoeda(lucro)}`;
-
-        const valor_lucro = vgvTotal ? (lucro / vgvTotal) * 100 : 0;
-
-        document.getElementById('percentual_lucro').textContent = `Percentual Lucro: ${valor_lucro.toFixed(0)}%`;
-    }
-
-    function calcularLucroPadeiro() {
-        const unidades = obterUnidades() || 1;
-        const vgvUnitario = obterVGV();
-        const vgvTotal = vgvUnitario * unidades;
-
-        const quitacao = limparValorMoeda(document.getElementById('valor_quitacao').textContent) || 0;
-
-        const lucroPadeiro = vgvTotal - quitacao;
-
-        document.getElementById('lucro_bruto').textContent = `Lucro do Bruto: ${formatarMoeda(lucroPadeiro)}`;
-    }
-
-    // -------------------------------------------------------------------------
+    const limparValor = v =>
+        Number(String(v).replace(/\D/g, '')) / 100 || 0;
 
     function aplicarMascaraMoeda(input) {
-        input.addEventListener('input', (e) => {
-            let valor = e.target.value.replace(/\D/g, '');
-            let valorNumerico = Number(valor) / 100;
-            e.target.value = formatarMoeda(valorNumerico);
-            calcularTotal();
+        input.value = formatarMoeda(0);
+        input.addEventListener('input', e => {
+            const valor = limparValor(e.target.value);
+            e.target.value = formatarMoeda(valor);
+            calcularTudo();
         });
     }
 
-    aplicarMascaraMoeda(condominioInput);
-    aplicarMascaraMoeda(aguaInput);
-    aplicarMascaraMoeda(custo_do_dinheiro);
-    aplicarMascaraMoeda(vgvInput);
+    /* ================= INPUTS COM MÁSCARA ================= */
+    [
+        'valor_aquisicao',
+        'custo_por_metro',
+        'custo_dinheiro',
+        'valor_condominio',
+        'valor_agua_energia',
+        'vgv'
+    ].forEach(id => aplicarMascaraMoeda(el(id)));
 
-    valor_aquisicao.addEventListener('input', (e) => {
-        let valor = e.target.value.replace(/\D/g, '');
-        let valorNumerico = Number(valor) / 100;
-        e.target.value = formatarMoeda(valorNumerico);
+    /* ================= BASE OBRA ================= */
+    function custoObraBase() {
+        const unidades = Number(el('qtd_unidades').value) || 0;
+        const area = Number(el('metragem_da_obra').value) || 0;
+        const custoMetro = limparValor(el('custo_por_metro').value);
+        return unidades * area * custoMetro;
+    }
 
-        let valorITBI = valorNumerico * ibti;
-        itbiResultado.textContent = `Resultado ITBI (2%): ${formatarMoeda(valorITBI)}`;
+    /* ================= CÁLCULO PRINCIPAL ================= */
+    function calcularTudo() {
 
-        preco_bruto_terreno.textContent = `Valor Bruto do Terreno: ${formatarMoeda(valorNumerico)}`;
+        /* ---------- TERRENO ---------- */
+        const terreno = limparValor(el('valor_aquisicao').value);
+        const custoObra = custoObraBase();
 
-        calcularIPTU();
-        calcularResultadoOperacional();
-        calcularTotal();
-    });
+        const itbi = terreno * ITBI;
+        const rgi = (terreno + custoObra) * RGI;
+        const certidao = itbi * CERTIDAO;
 
-    custoMetro.addEventListener('change', () => {
-        calcularCustoObra();
-        calcularTotal();
-    });
+        el('itbi_resultado').textContent =
+            `Resultado ITBI (2%): ${formatarMoeda(itbi)}`;
 
-    qtdUnidades.addEventListener('change', () => {
-        calcularCustoObra();
-        calcularTotal();
-        CalcularCorretagem();
-    });
+        el('rgi').textContent =
+            `Resultado RGI (0,75%): ${formatarMoeda(rgi)}`;
 
-    metragem.addEventListener('change', () => {
-        calcularCustoObra();
-        calcularTotal();
-    });
+        el('certidao_etc').textContent =
+            `Certidão (13%): ${formatarMoeda(certidao)}`;
 
-    vgvInput.addEventListener('input', () => {
-        CalcularCorretagem();
-        calcularLucroPadeiro();
-        calcularLucroBruto();
-    });
+        const totalTerreno = terreno + itbi + rgi + certidao;
 
-    condominioInput.addEventListener('change', calcularResultadoOperacional);
-    aguaInput.addEventListener('change', calcularResultadoOperacional);
-    custo_obra_bruto_element.addEventListener('DOMSubtreeModified', calcularResultadoOperacional);
+        el('custo_total_terreno').textContent =
+            `Total: ${formatarMoeda(totalTerreno)}`;
 
-    preco_bruto_terreno.textContent = `Valor Bruto do Terreno: ${valor_aquisicao.value}`;
-    custo_obra_financiamento.textContent = `Custo Obra e Financiamento: ${resultadoFinanciamento.textContent}`;
+        /* ---------- OBRA ---------- */
+        const lucroConstrutor = custoObra * LUCRO_CONSTRUTOR;
 
-    calcularIPTU();
-    calcularCustoObra();
-    calcularTotal();
-    CalcularCorretagem();
+        el('lucro_construtor').textContent =
+            `Lucro do Construtor 10%: ${formatarMoeda(lucroConstrutor)}`;
+
+        el('custo_total_obra').textContent = `Total ${formatarMoeda(custoObra)}`
+            ;
+
+        /* ---------- DESPESAS ---------- */
+        const custoDinheiro = limparValor(el('custo_dinheiro').value);
+        const condominio = limparValor(el('valor_condominio').value);
+        const agua = limparValor(el('valor_agua_energia').value);
+
+        const iptu = terreno * IPTU;
+        el('valor_iptu').value = formatarMoeda(iptu);
+
+        const habite = (terreno + custoObra) * HABITE_SE;
+
+        el('habite_se').textContent =
+            `HABITE-SE + Averbação + ISS + INSS (despachante): ${formatarMoeda(habite)}`;
+
+        const despesas =
+            custoDinheiro + condominio + agua + iptu;
+
+        el('resultado_despesas').textContent =
+            `Despesas Do Imóvel: ${formatarMoeda(despesas)}`;
+
+        /* ---------- TOTAL OPERACIONAL (DETALHADO) ---------- */
+        el('to_terreno').textContent =
+            `Terreno: ${formatarMoeda(terreno)}`;
+
+        el('to_itbi').textContent =
+            `ITBI: ${formatarMoeda(itbi)}`;
+
+        el('to_rgi').textContent =
+            `RGI: ${formatarMoeda(rgi)}`;
+
+        el('to_certidao').textContent =
+            `Certidões: ${formatarMoeda(certidao)}`;
+
+        el('to_custo_obra').textContent =
+            `Custo da Obra: ${formatarMoeda(custoObra)}`;
+
+        el('to_lucro_construtor').textContent =
+            `Lucro Construtor: ${formatarMoeda(lucroConstrutor)}`;
+
+        el('to_iptu').textContent =
+            `IPTU: ${formatarMoeda(iptu)}`;
+
+        el('to_habite').textContent =
+            `Habite-se: ${formatarMoeda(habite)}`;
+
+        el('to_condominio').textContent =
+            `Condomínio: ${formatarMoeda(condominio)}`;
+
+        el('to_agua_luz').textContent =
+            `Água e Luz: ${formatarMoeda(agua)}`;
+
+        el('to_custo_dinheiro').textContent =
+            `Custo do Dinheiro: ${formatarMoeda(custoDinheiro)}`;
+
+        const totalOperacional =
+            terreno +
+            itbi +
+            rgi +
+            certidao +
+            custoObra +
+            lucroConstrutor +
+            iptu +
+            habite +
+            condominio +
+            agua +
+            custoDinheiro;
+
+        el('resultado_operacional').textContent =
+            formatarMoeda(totalOperacional);
+
+        /* ---------- CORRETAGEM ---------- */
+        const unidades = Number(el('qtd_unidades').value) || 1;
+        const vgvUnit = limparValor(el('vgv').value);
+        const vgv = vgvUnit * unidades;
+
+        const corretagem = vgv * CORRETOR;
+        const propaganda = vgv * PROPAGANDA;
+        const totalCorretagem = corretagem + propaganda;
+
+        el('corretor').textContent =
+            `Corretor (10%) ${formatarMoeda(corretagem)}`;
+
+        el('propaganda').textContent =
+            formatarMoeda(propaganda);
+
+        el('total_corretagem').textContent =
+            `Total Corretagem: ${formatarMoeda(totalCorretagem)}`;
+
+        el('resultado_corretagem').textContent =
+            `Total Corretagem: ${formatarMoeda(totalCorretagem)}`;
+
+        /* ---------- VALOR FINAL ---------- */
+        const lucroBruto = vgv - totalOperacional;
+        const imposto = lucroBruto > 0 ? lucroBruto * IR : 0;
+        const lucroLiquido = lucroBruto - imposto - totalCorretagem;
+        const percentual = vgv > 0 ? (lucroLiquido / vgv) * 100 : 0;
+
+        el('valor_quitacao').textContent =
+            `Total Operacional ${formatarMoeda(totalOperacional)}`;
+
+        el('imposto_de_renda').textContent =
+            `Imposto de Renda: ${formatarMoeda(imposto)}`;
+
+        el('lucro_bruto').textContent =
+            `Lucro Bruto: ${formatarMoeda(lucroBruto)}`;
+
+        el('lucro_liquido').textContent =
+            `Lucro Liquido: ${formatarMoeda(lucroLiquido)}`;
+
+        el('percentual_lucro').textContent =
+            `Percentual Lucro: ${percentual.toFixed(2)}%`;
+    }
+
+    /* ================= EVENTOS ================= */
+    ['qtd_unidades', 'metragem_da_obra'].forEach(id =>
+        el(id).addEventListener('input', calcularTudo)
+    );
+
+    calcularTudo();
 });

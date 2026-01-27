@@ -58,6 +58,7 @@ button {
   border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;
+  margin-top: 40vh;
 }
 
 /*===== All Button Style =====*/
@@ -129,6 +130,7 @@ button {
   -ms-transition: all 0.3s ease-out 0s;
   -o-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
+
 }
 
 
@@ -168,6 +170,7 @@ button {
 
 .sticky .navbar-nav .nav-item a {
   color: #793CBD;
+
 }
 
 
@@ -184,7 +187,7 @@ button {
   position: absolute;
   content: '';
   /* background-color: rgba(26, 49, 84, 0.52); */
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
   height: 100%;
   left: 0;
