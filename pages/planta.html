@@ -30,6 +30,16 @@
         display: none;
     }
 
+    .zoom-img {
+        width: 300px;
+        transition: transform 0.3s ease;
+    }
+
+    .zoom-img:hover {
+        transform: scale(5);
+    }
+
+
     @media (max-width: 768px) or (orientation: portrait) {
 
         #mobile {
@@ -48,7 +58,7 @@
 
     <img src="./planta baixa mobile.png" id="mobile">
 
-    <img src="./planta baixa desktop.png" id="desktop">
+    <img src="./planta baixa mobile.png" id="desktop" class="zoom-img">
 
 </body>
 
