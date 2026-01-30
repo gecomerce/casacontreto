@@ -4,21 +4,44 @@
 }
 
 @font-face {
-    font-family: "MinhaFonte";
-    src: url("../fonts/SORA-REGULAR.OTF") format("opentype");
-    font-weight: bold;
-    font-style: italic;
+    font-family: 'Sora';
+    src: url('../fonts/Sora-Regular.otf') format('opentype');
+    font-weight: 400;
 }
 
+@font-face {
+    font-family: 'Sora';
+    src: url('../fonts/Sora-ExtraBold.ttf') format('opentype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Sora';
+    src: url('../fonts/Sora-Light.ttf') format('opentype');
+    font-weight: 400;
+}
+
+/* @font-face {
+    font-family: 'Sora';
+    src: url('../fonts/Sora-Thin.ttf') format('opentype');
+    font-weight: 400;
+} */
+
+
+/* -------------------------------------------------------------- */
 
 html {
   scroll-behavior: smooth;
 }
 
+html, body, * {
+    font-family: 'Sora', sans-serif !important;
+}
+
+
 body {
-  font-family: "Poppins", sans-serif;
-  /* font-family: "MinhaFonte", sans-serif; */
-  font-weight: normal;
+
+  font-weight: 400;
   font-style: normal;
   color: #677284;
 }
